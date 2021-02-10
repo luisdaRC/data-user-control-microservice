@@ -1,0 +1,21 @@
+package co.edu.unicartagena.control.application.dtos;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Builder
+public class PersonaListDTO {
+
+    private final int idPersona;
+    private final String nombres;
+    private final String apellidos;
+    private final String numeroDocumento;
+    private final String tipoDocumento;
+    private final String rol;
+    private final BienPrivadoDTO bienPrivadoDTO;
+}

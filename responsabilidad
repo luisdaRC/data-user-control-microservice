@@ -1,0 +1,5 @@
+-Este microservicio será el encargado de realizar registro (quizá cambio de pass) de secretario y revisor.
+
+-Guardar y actualizar data proveniente del core a propiedad horizontal, bien privado y persona (importante)
+
+-También estará a cargo de la creación y validación de tokens (para sus users) con el fin de que sólo accedan a cierto endpoint los usuarios definidos (superadmin, admin)
