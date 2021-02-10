@@ -61,6 +61,7 @@ public class PersonalApoyoService {
 
     public PersonalApoyo patchPersonal(PersonalApoyo personalApoyo){
 
+        log.debug("Verificando existencia de {} en el sistema",personalApoyo.getRol());
         Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
                 personalApoyo.getRol(),personalApoyo.getEstado());
 

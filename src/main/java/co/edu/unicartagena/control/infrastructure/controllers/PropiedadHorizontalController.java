@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/propiedad-horizontal")
 public class PropiedadHorizontalController {
 
-    // Sosio, los métodos del core llaman services y las del access los GET son con querys y POSTS con command
+    // Los métodos del core llaman services y las del access los GET son con querys y POSTS con command
     // Analyze sequence of method or classes calling in both of those projects and determine how can i do
     // to build my own sequence in these components.
 
