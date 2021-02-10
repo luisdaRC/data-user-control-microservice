@@ -72,7 +72,10 @@ public class PropiedadHorizontalController {
     //Analizar las posibles alternativas que pueden presentarse al momento de actualizar
         //1. Que no se tengan registros de esa ph y se inserten todos los elementos extraidos del core.
         //2. Que se tengan registros y hayan nuevos en la nueva lista extraida del core.
+
         //3. Que se tengan registros y hayan menos en la lista del core (eliminados).
+        // (In this case, the records in database will be the same because any information
+        // about the person deleted would be needed in the future, regarding to votes).
 
         //Jackson dependency may be missing
         //https://stackoverflow.com/questions/35266289/how-to-get-list-of-objects-via-requestbody-in-spring-boot-api

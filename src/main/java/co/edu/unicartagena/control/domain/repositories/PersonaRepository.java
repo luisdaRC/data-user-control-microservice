@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface PersonaRepository {
     Persona registrarPersona(Persona persona);
-    List<Persona> findPersonaPorPropiedad(Integer propiedadHorizontal);
+    List<Persona> findByIdPropiedad(Integer idPropiedad);
     List<Persona> saveAll(List<Persona> personas);
 }
