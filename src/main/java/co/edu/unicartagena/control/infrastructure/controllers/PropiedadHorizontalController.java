@@ -70,7 +70,7 @@ public class PropiedadHorizontalController {
     //Keep coding, starting by the next group of posts and gets from:
     //https://github.com/luisdaRC/votations-frontend/blob/feature/revisor/src/app/services/sgph/propiedad-horizontal.service.ts
 
-
+    //Keep with the implementation of PersonalApoyo login endpoint. Taking into account jwt settings and so on (regarding to core)
 
 
 }
