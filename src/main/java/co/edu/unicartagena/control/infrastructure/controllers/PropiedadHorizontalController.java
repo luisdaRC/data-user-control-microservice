@@ -62,7 +62,7 @@ public class PropiedadHorizontalController {
      * (In this case, the records in database will be the same because any information
      * about the person deleted would be needed in the future, regarding to votes).
      * */
-    @PostMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updatePersonasYBienes(@RequestBody List<PersonaListDTO> personaListDTO){
         return ResponseEntity.ok().body(updatePersonasYBienesCommand.ejecutar(personaListDTO));
     }
@@ -70,7 +70,9 @@ public class PropiedadHorizontalController {
     //Keep coding, starting by the next group of posts and gets from:
     //https://github.com/luisdaRC/votations-frontend/blob/feature/revisor/src/app/services/sgph/propiedad-horizontal.service.ts
 
-    //Keep with the implementation of PersonalApoyo login endpoint. Taking into account jwt settings and so on (regarding to core)
+    //Keep with the implementation of PersonalApoyo login endpoint. Taking into account jwt settings and so on (regarding to core).
+
+    //Dedicate all the effort to login analysis and implementation in the core. The above!
 
 
 }

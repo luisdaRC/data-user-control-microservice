@@ -10,7 +10,7 @@ public class PersonalApoyoBuilder {
     public static PersonalApoyo crearPersonalApoyodesdeDTO(PersonalApoyoDTO personalApoyoDTO){
         return PersonalApoyo.builder()
                 .idPropiedad(personalApoyoDTO.getIdPropiedad())
-                .email(personalApoyoDTO.getEmail())
+                .email(personalApoyoDTO.getEmail().toLowerCase())
                 .pass(personalApoyoDTO.getPass())
                 .estado(personalApoyoDTO.getEstado())
                 .rol(personalApoyoDTO.getRol())

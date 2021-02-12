@@ -12,6 +12,8 @@ public interface PersonalApoyoRepository {
     //Search if exist anything with those parameters
     Optional<PersonalApoyo> findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc (Integer idPropiedad, String rol, String tipoDoc, String numDoc);
 
+    Optional<PersonalApoyo> findByEmail(String email);
+
     PersonalApoyo save (PersonalApoyo personalApoyo);
 
     //Search by tipoDoc, numDoc, rol and idPropiedad and insert estado

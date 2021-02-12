@@ -88,4 +88,21 @@ public class PersonalApoyoService {
         throw new BusinessException("El usuario no está registrado en el sistema");
 
     }
+
+    public PersonalApoyo findPersonalByEmailAndPass(String email, String encodedPass){
+        log.debug("Verificando existencia de user con email {} en el sistema",email);
+        Optional<PersonalApoyo> personal = personalApoyoRepository.findByEmail(email);
+
+        if(personal.isEmpty()){
+            log.debug("Usuario inexistente");
+            throw new BusinessException("Usuario inexistente");
+        }
+
+        if(!personal.get().getPass().equals(encodedPass)){
+            log.debug("Password incorrecto");
+            throw new BusinessException("Password incorrecto");
+        }
+
+        return personal.get();
+    }
 }
