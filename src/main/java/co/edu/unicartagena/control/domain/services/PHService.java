@@ -10,8 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Log4j2
 @Service
@@ -44,17 +43,62 @@ public class PHService {
     public List<Persona> updateData(List<Persona> personas, List<BienPrivado> bienPrivados) {
         log.debug("Actualizando datos de la propiedad #: {}", bienPrivados.get(0).getIdPropiedad());
 
-        Optional<List<BienPrivado>> exist = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad());
+        Optional<List<BienPrivado>> existenBienes = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad());
 
         // If there are no "bienes" in that property, then they all are stored in database
-        if (exist.isEmpty()){
+        if (existenBienes.isEmpty()){
+            log.debug("Propiedad #: {} con datos de personas vacios, insertándolos.", bienPrivados.get(0).getIdPropiedad());
             bienPrivadoRepository.saveAll(bienPrivados);
             return personaRepository.saveAll(personas);
-        }
+
+        } else if (existenBienes.get().size() == personas.size())
+            return personas;
+
         // Otherwise, we proceed to compare the results of the database with the new list
-        // from the core and insert the missing ones.
-        // Look for ways of doing it with "Object Sets"
-        return personas; //Quit this return, you know.
+        // from the core and insert the missing ones
+        List<Persona> existenPersonas = personaRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad());
+
+        log.debug("Actualizando datos faltantes de personas en la propiedad #: {}", bienPrivados.get(0).getIdPropiedad());
+        bienPrivadoRepository.saveAll(deleteBienesDuplicados(existenBienes.get(), bienPrivados));
+        return personaRepository.saveAll(deletePersonasDuplicadas(existenPersonas, personas));
+    }
+
+    public List<Persona> deletePersonasDuplicadas(List<Persona> personasEnDB, List<Persona> personasDeCore){
+        Set<Persona> setPersonasEnDB = new HashSet<>();
+        Set<Persona> setPersonasDeCore = new HashSet<>();
+
+        //List to Set
+        setPersonasEnDB.addAll(personasEnDB);
+        setPersonasDeCore.addAll(personasDeCore);
+
+        //Asymmetric difference to get the non present in DB
+        setPersonasDeCore.removeAll(setPersonasEnDB);
+        
+        List<Persona> difference = new ArrayList<>();
+
+        //Set to List
+        difference.addAll(setPersonasDeCore);
+
+        return difference;
+    }
+
+    public List<BienPrivado> deleteBienesDuplicados(List<BienPrivado> bienesEnDB, List<BienPrivado> bienesDeCore){
+        Set<BienPrivado> setBienesEnDB = new HashSet<>();
+        Set<BienPrivado> setBienesDeCore = new HashSet<>();
+
+        //List to Set
+        setBienesEnDB.addAll(bienesEnDB);
+        setBienesDeCore.addAll(bienesDeCore);
+
+        //Asymmetric difference to get the non present in DB
+        setBienesDeCore.removeAll(setBienesEnDB);
+
+        List<BienPrivado> difference = new ArrayList<>();
+
+        //Set to List
+        difference.addAll(setBienesDeCore);
+
+        return difference;
     }
 
 }

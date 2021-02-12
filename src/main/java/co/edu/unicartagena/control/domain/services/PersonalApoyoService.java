@@ -30,18 +30,29 @@ public class PersonalApoyoService {
         Optional<PropiedadHorizontal> existePropiedad = propiedadHorizontalRepository
                 .findById(personalApoyo.getIdPropiedad());
 
-        Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
-                personalApoyo.getRol(),personalApoyo.getEstado());
-
         if(existePropiedad.isEmpty()) {
             log.debug("No existe la propiedad con id {}",personalApoyo.getIdPropiedad());
             throw new BusinessException("No existe la propiedad referenciada");
         }
 
-        if(existePersonal.isPresent()) {
-            log.debug("El {} con número de identificación {} ya está registrado en el sistema",
-                    personalApoyo.getRol(),personalApoyo.getNumeroDocumento());
-            throw new BusinessException("El usuario ya existe ne l sistema");
+        Optional<PersonalApoyo> existePersonalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
+                personalApoyo.getRol(),personalApoyo.getEstado());
+
+        if(existePersonalActivo.isPresent()) {
+            log.debug("El usuario de {} de la propiedad está activo en el sistema. Eliminelo para nuevo registro",
+                    personalApoyo.getRol());
+
+            throw new BusinessException("El usuario está activo en el sistema. Elimínelo");
+        }
+
+        Optional<PersonalApoyo> actualizarPersonal = personalApoyoRepository
+                .findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc(personalApoyo.getIdPropiedad(),personalApoyo.getRol(),
+                        personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento());
+
+        if(actualizarPersonal.isPresent()){
+            log.debug("Actualizando datos de {} en el sistema", personalApoyo.getRol());
+            return personalApoyoRepository.updatePersonalByEstadoAndEmailAndPass(personalApoyo.getEstado(),
+                    personalApoyo.getEmail(),personalApoyo.getPass(),personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento());
         }
 
         log.debug("Se procede a registrar el {} en el sistema.",
@@ -61,13 +72,14 @@ public class PersonalApoyoService {
 
     public PersonalApoyo patchPersonal(PersonalApoyo personalApoyo){
 
+        log.debug("Verificando existencia de {} en el sistema",personalApoyo.getRol());
         Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
                 personalApoyo.getRol(),personalApoyo.getEstado());
 
         if(existePersonal.isPresent()) {
             log.debug("Se procede a actualizar el {} en el sistema.",
                     personalApoyo.getRol());
-            return personalApoyoRepository.update(personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento(),
+            return personalApoyoRepository.changeEstado(personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento(),
                     personalApoyo.getRol(),personalApoyo.getIdPropiedad(),personalApoyo.getEstado());
         }
 

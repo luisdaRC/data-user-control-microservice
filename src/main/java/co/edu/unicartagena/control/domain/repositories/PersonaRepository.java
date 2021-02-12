@@ -5,7 +5,7 @@ import co.edu.unicartagena.control.domain.entities.Persona;
 import java.util.List;
 
 public interface PersonaRepository {
-    Persona registrarPersona(Persona persona);
-    List<Persona> findPersonaPorPropiedad(Integer propiedadHorizontal);
+    Persona save(Persona persona);
+    List<Persona> findByIdPropiedad(Integer idPropiedad);
     List<Persona> saveAll(List<Persona> personas);
 }
