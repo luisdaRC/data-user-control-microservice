@@ -42,7 +42,14 @@ public class PersonalApoyoService {
             log.debug("El usuario de {} de la propiedad está activo en el sistema. Eliminelo para nuevo registro",
                     personalApoyo.getRol());
 
-            throw new BusinessException("El usuario está activo en el sistema. Elimínelo");
+            throw new BusinessException("Un usuario con el rol deseado está activo en el sistema. Elimínelo");
+        }
+
+        Optional<PersonalApoyo> existeEmail = personalApoyoRepository.findByEmail(personalApoyo.getEmail());
+
+        if(existeEmail.isPresent()) {
+            log.debug("Existe un usuario con el email ingresado");
+            throw new BusinessException("Existe un usuario con el email ingresado");
         }
 
         Optional<PersonalApoyo> actualizarPersonal = personalApoyoRepository

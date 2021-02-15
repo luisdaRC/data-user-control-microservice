@@ -3,6 +3,7 @@ package co.edu.unicartagena.control.domain.services;
 import co.edu.unicartagena.control.domain.entities.BienPrivado;
 import co.edu.unicartagena.control.domain.entities.Persona;
 import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
+import co.edu.unicartagena.control.domain.exceptions.BusinessException;
 import co.edu.unicartagena.control.domain.repositories.BienPrivadoRepository;
 import co.edu.unicartagena.control.domain.repositories.PersonaRepository;
 import co.edu.unicartagena.control.domain.repositories.PropiedadHorizontalRepository;
@@ -38,6 +39,16 @@ public class PHService {
     public Boolean existePropiedad(String idPropiedad){
         log.debug("Verificando existencia de Propiedad con id {} en PHService",idPropiedad);
         return propiedadHorizontalRepository.findById(Integer.parseInt(idPropiedad)).isPresent();
+    }
+
+    public PropiedadHorizontal obtenerPropiedad(String id){
+        if(!existePropiedad(id)) {
+            log.debug("La propiedad con id {} no existe",id);
+            throw new BusinessException("La propiedad indicada no existe");
+        }
+
+        Optional<PropiedadHorizontal> ph = propiedadHorizontalRepository.findById(Integer.parseInt(id));
+        return ph.get();
     }
 
     public List<Persona> updateData(List<Persona> personas, List<BienPrivado> bienPrivados) {
