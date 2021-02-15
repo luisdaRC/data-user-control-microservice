@@ -83,7 +83,7 @@ public class PersonalApoyoController {
             model.put("email", personal.getEmail());
             model.put("nombres", personal.getNombres());
             model.put("rol", personal.getRol());
-            model.put("idPropiedadHorizontal", personal.getIdPropiedad());
+            model.put("idPropiedadHorizontal", idPh);
             model.put("nombrePH", ph.getNombre());
 
             return ResponseEntity
