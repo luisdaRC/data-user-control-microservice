@@ -1,6 +1,6 @@
 package co.edu.unicartagena.control.infrastructure.persistence.repositories;
 
-import co.edu.unicartagena.control.domain.entities.BienPrivado;
+import co.edu.unicartagena.control.infrastructure.persistence.entities.BienPrivado;
 import co.edu.unicartagena.control.domain.repositories.BienPrivadoRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

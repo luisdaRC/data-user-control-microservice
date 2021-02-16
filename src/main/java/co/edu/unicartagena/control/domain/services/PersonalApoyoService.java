@@ -28,7 +28,7 @@ public class PersonalApoyoService {
     public PersonalApoyo registrarPersonal(PersonalApoyo personalApoyo){
 
         Optional<PropiedadHorizontal> existePropiedad = propiedadHorizontalRepository
-                .findById(personalApoyo.getIdPropiedad());
+                .findPHById(personalApoyo.getIdPropiedad());
 
         if(existePropiedad.isEmpty()) {
             log.debug("No existe la propiedad con id {}",personalApoyo.getIdPropiedad());

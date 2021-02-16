@@ -38,7 +38,7 @@ public class PHService {
 
     public Boolean existePropiedad(String idPropiedad){
         log.debug("Verificando existencia de Propiedad con id {} en PHService",idPropiedad);
-        return propiedadHorizontalRepository.findById(Integer.parseInt(idPropiedad)).isPresent();
+        return propiedadHorizontalRepository.findPHById(Integer.parseInt(idPropiedad)).isPresent();
     }
 
     public PropiedadHorizontal obtenerPropiedad(String id){
@@ -47,7 +47,7 @@ public class PHService {
             throw new BusinessException("La propiedad indicada no existe");
         }
 
-        Optional<PropiedadHorizontal> ph = propiedadHorizontalRepository.findById(Integer.parseInt(id));
+        Optional<PropiedadHorizontal> ph = propiedadHorizontalRepository.findPHById(Integer.parseInt(id));
         return ph.get();
     }
 

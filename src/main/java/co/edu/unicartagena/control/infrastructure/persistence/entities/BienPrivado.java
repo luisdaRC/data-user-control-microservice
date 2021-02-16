@@ -9,7 +9,6 @@ public class BienPrivado implements Serializable {
 
     @Id
     @Column(name = "idBienPrivado")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idBienPrivado;
 
     @JoinColumn(name = "PropiedadHorizontal_idPH", referencedColumnName = "idPropiedadHorizontal")

@@ -11,7 +11,6 @@ public class PropiedadHorizontal implements Serializable {
 
     @Id
     @Column(name = "idPropiedadHorizontal")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPropiedadHorizontal;
 
     @Column(name = "nombre")

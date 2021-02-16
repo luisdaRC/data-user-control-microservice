@@ -11,7 +11,7 @@ public class BienPrivadoBuilder {
         return BienPrivado.builder()
                 .id(bienPrivadoDTO.getId())
                 .idPropiedad(bienPrivadoDTO.getIdPropiedad())
-                .coeficienteCopropiedad(bienPrivadoDTO.getCoeficienteCopropiedad())
+                .coeficienteCopropiedad(1)
                 .matriculaInmobiliaria(bienPrivadoDTO.getMatriculaInmobiliaria())
                 .referenciaCatastral(bienPrivadoDTO.getReferenciaCatastral())
                 .build();
@@ -21,7 +21,6 @@ public class BienPrivadoBuilder {
         return BienPrivadoDTO.builder()
                 .id(bienPrivado.getId())
                 .idPropiedad(bienPrivado.getIdPropiedad())
-                .coeficienteCopropiedad(bienPrivado.getCoeficienteCopropiedad())
                 .matriculaInmobiliaria(bienPrivado.getMatriculaInmobiliaria())
                 .referenciaCatastral(bienPrivado.getReferenciaCatastral())
                 .build();

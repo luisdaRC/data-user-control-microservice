@@ -2,7 +2,6 @@ package co.edu.unicartagena.control.infrastructure.persistence.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "PersonalApoyo")
@@ -17,30 +16,27 @@ public class PersonalApoyo implements Serializable {
     @ManyToOne(optional = true)
     private PropiedadHorizontal idPropiedad;
 
-    @Column("email")
-    private final String email;
+    @Column(name = "email")
+    private String email;
 
-    @Column("pass")
-    private final String pass;
+    @Column(name = "pass")
+    private String pass;
 
-    @Column("estado")
-    private final boolean estado;
+    @Column(name = "estado")
+    private Boolean estado;
 
-    @Column("rol")
-    private final String rol;
+    @Column(name = "rol")
+    private String rol;
 
-    @Column("nombres")
-    private final String nombres;
+    @Column(name = "nombres")
+    private String nombres;
 
-    @Column("numeroDocumento")
-    private final String numeroDocumento;
+    @Column(name = "numeroDocumento")
+    private String numeroDocumento;
 
-    @Column("tipoDocumento")
-    private final String tipoDocumento;
+    @Column(name = "tipoDocumento")
+    private String tipoDocumento;
 
-    public PersonalApoyo () {
-
-    }
 
     public Integer getIdPersonalApoyo() {
         return idPersonalApoyo;

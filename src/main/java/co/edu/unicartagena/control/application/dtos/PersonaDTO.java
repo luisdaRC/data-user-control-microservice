@@ -17,4 +17,6 @@ public class PersonaDTO {
     private final String numeroDocumento;
     private final String tipoDocumento;
     private final String rol;
+
+
 }

@@ -1,7 +1,6 @@
 package co.edu.unicartagena.control.application.commands.propiedad;
 
 import co.edu.unicartagena.control.application.commands.Command;
-import co.edu.unicartagena.control.application.dtos.PersonaDTO;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.domain.entities.BienPrivado;
 import co.edu.unicartagena.control.domain.entities.Persona;

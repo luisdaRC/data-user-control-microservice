@@ -9,7 +9,7 @@ public class PersonaBuilder {
 
     public Persona crearPersonaDesdeDTO(PersonaDTO personaDTO){
         return Persona.builder()
-                .idBienPrivado(personaDTO.getIdBienPrivado())
+                //.idBienPrivado(personaDTO.getIdBienPrivado())
                 .nombres(personaDTO.getNombres())
                 .apellidos(personaDTO.getApellidos())
                 .numeroDocumento(personaDTO.getNumeroDocumento())
@@ -19,7 +19,7 @@ public class PersonaBuilder {
 
     public PersonaDTO crearPersonaDTODesdeEntidad(Persona persona){
         return PersonaDTO.builder()
-                .idBienPrivado(persona.getIdBienPrivado())
+                //.idBienPrivado(persona.getIdBienPrivado())
                 .nombres(persona.getNombres())
                 .apellidos(persona.getApellidos())
                 .numeroDocumento(persona.getNumeroDocumento())

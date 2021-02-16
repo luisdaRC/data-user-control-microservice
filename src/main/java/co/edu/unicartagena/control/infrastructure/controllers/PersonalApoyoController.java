@@ -5,6 +5,7 @@ import co.edu.unicartagena.control.application.commands.propiedad.ObtenerPHComma
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.application.dtos.PropiedadHorizontalDTO;
 import co.edu.unicartagena.control.application.dtos.UserRequestDTO;
+import co.edu.unicartagena.control.domain.exceptions.BusinessException;
 import co.edu.unicartagena.control.infrastructure.configuration.EncodePassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,14 +33,22 @@ public class PersonalApoyoController {
 
     @PostMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonalApoyoDTO registrarRevisor(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
-        PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-        return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+        try {
+            PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
+            return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+        } catch (Exception e){
+            throw new BusinessException("Ocurrió un error al registrar el revisor");
+        }
     }
 
     @PostMapping(value = "/secretary", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonalApoyoDTO registrarSecretario(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
-        PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-        return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+        try {
+            PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
+            return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+        } catch (Exception e){
+            throw new BusinessException("Ocurrió un error al registrar el secretario");
+        }
     }
 
     @GetMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,8 +75,12 @@ public class PersonalApoyoController {
 
     @PatchMapping(value = "/patch", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonalApoyoDTO patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
-        PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-        return patchPersonalCommand.ejecutar(personalApoyoDTO1);
+        try {
+            PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
+            return patchPersonalCommand.ejecutar(personalApoyoDTO1);
+        } catch (Exception e){
+            throw new BusinessException("El usuario no está registrado en el sistema");
+        }
     }
 
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
