@@ -1,0 +1,18 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DB_PH_VOTACION
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    mapping-resources:
+      - db/mappings/persona.xml
+      - db/mappings/bienprivado.xml
+      - db/mappings/personalapoyo.xml
+      - db/mappings/propiedadhorizontal.xml
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml

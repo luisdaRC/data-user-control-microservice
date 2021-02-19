@@ -2,9 +2,9 @@ package co.edu.unicartagena.control.infrastructure.persistence.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+/*
 @Entity
-@Table(name = "Persona")
+@Table(name = "Persona")*/
 public class Persona implements Serializable {
 
     @Id

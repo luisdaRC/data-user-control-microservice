@@ -1,12 +1,11 @@
 package co.edu.unicartagena.control.infrastructure.persistence.entities;
 
 import javax.persistence.*;
-import java.beans.BeanInfo;
 import java.io.Serializable;
 import java.util.List;
-
+/*
 @Entity
-@Table(name = "PropiedadHorizontal")
+@Table(name = "PropiedadHorizontal")*/
 public class PropiedadHorizontal implements Serializable {
 
     @Id

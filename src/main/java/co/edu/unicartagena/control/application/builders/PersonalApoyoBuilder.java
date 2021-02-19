@@ -2,6 +2,7 @@ package co.edu.unicartagena.control.application.builders;
 
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.domain.entities.PersonalApoyo;
+import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 
 public class PersonalApoyoBuilder {
 
@@ -9,7 +10,8 @@ public class PersonalApoyoBuilder {
 
     public static PersonalApoyo crearPersonalApoyodesdeDTO(PersonalApoyoDTO personalApoyoDTO){
         return PersonalApoyo.builder()
-                .idPropiedad(personalApoyoDTO.getIdPropiedad())
+                .idPropiedad(
+                        PropiedadHorizontal.builder().id(personalApoyoDTO.getIdPropiedad()).build())
                 .email(personalApoyoDTO.getEmail().toLowerCase())
                 .pass(personalApoyoDTO.getPass())
                 .estado(personalApoyoDTO.getEstado())
@@ -22,7 +24,7 @@ public class PersonalApoyoBuilder {
 
     public static PersonalApoyoDTO crearPersonalApoyoDTODesdeEntidad(PersonalApoyo personalApoyo){
         return PersonalApoyoDTO.builder()
-                .idPropiedad(personalApoyo.getIdPropiedad())
+                .idPropiedad(personalApoyo.getIdPropiedad().getId())
                 .email(personalApoyo.getEmail())
                 .pass(personalApoyo.getPass())
                 .estado(personalApoyo.getEstado())

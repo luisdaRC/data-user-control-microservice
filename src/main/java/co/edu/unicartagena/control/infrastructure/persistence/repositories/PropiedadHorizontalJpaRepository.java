@@ -1,6 +1,6 @@
 package co.edu.unicartagena.control.infrastructure.persistence.repositories;
 
-import co.edu.unicartagena.control.infrastructure.persistence.entities.PropiedadHorizontal;
+import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 import co.edu.unicartagena.control.domain.repositories.PropiedadHorizontalRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +15,7 @@ public interface PropiedadHorizontalJpaRepository extends JpaRepository<Propieda
 
     //Usar en esta clase queries personalizados, como se muestran en la doc de spring:
     //https://docs.spring.io/spring-data/jpa/docs/1.11.1.RELEASE/reference/html/#jpa.query-methods.at-query
-    @Query("select u from PropiedadHorizontal u where u.idPropiedadHorizontal = :id")
-    Optional<co.edu.unicartagena.control.domain.entities.PropiedadHorizontal> findPHById (@Param("id") Integer id);
+    //@Query("select u from PropiedadHorizontal u where u.idPropiedadHorizontal = :id")
+    @Query(value = "SELECT * FROM propiedadhorizontal WHERE idpropiedadhorizontal = :id", nativeQuery = true)
+    Optional<PropiedadHorizontal> findPHById (@Param("id") Integer id);
 }

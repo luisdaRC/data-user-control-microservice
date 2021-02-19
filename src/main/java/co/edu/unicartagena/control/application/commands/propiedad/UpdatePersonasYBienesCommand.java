@@ -4,6 +4,7 @@ import co.edu.unicartagena.control.application.commands.Command;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.domain.entities.BienPrivado;
 import co.edu.unicartagena.control.domain.entities.Persona;
+import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 import co.edu.unicartagena.control.domain.services.PHService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class UpdatePersonasYBienesCommand implements Command<List<Persona>,List<
 
         for(PersonaListDTO p:personaListDTOS){
             personas.add(Persona.builder().idPersona(p.getIdPersona())
-                            .idBienPrivado(p.getBienPrivadoDTO().getId())
+                            .idBienPrivado(
+                                    BienPrivado.builder().id(p.getBienPrivadoDTO().getId()).build())
                             .nombres(p.getNombres())
                             .apellidos(p.getApellidos())
                             .numeroDocumento(p.getNumeroDocumento())
@@ -35,8 +37,9 @@ public class UpdatePersonasYBienesCommand implements Command<List<Persona>,List<
                             .rol(p.getRol()).build());
 
             bienPrivados.add(BienPrivado.builder().id(p.getBienPrivadoDTO().getId())
-                            .idPropiedad(p.getBienPrivadoDTO().getIdPropiedad())
-                            .coeficienteCopropiedad(1)
+                            .idPropiedad(
+                                    PropiedadHorizontal.builder().id(p.getBienPrivadoDTO().getIdPropiedad()).build())
+                            .coeficienteCopropiedad((float) 1)
                             .matriculaInmobiliaria(p.getBienPrivadoDTO().getMatriculaInmobiliaria())
                             .referenciaCatastral(p.getBienPrivadoDTO().getReferenciaCatastral())
                             .build());

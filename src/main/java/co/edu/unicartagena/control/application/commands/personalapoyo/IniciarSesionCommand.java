@@ -8,9 +8,13 @@ import co.edu.unicartagena.control.domain.services.PersonalApoyoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Log4j2
-@Component
+@Service
+@Transactional
 public class IniciarSesionCommand implements Command<PersonalApoyoDTO, UserRequestDTO> {
 
     private final PersonalApoyoService personalApoyoService;

@@ -1,20 +1,20 @@
 package co.edu.unicartagena.control.domain.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class BienPrivado {
 
-    private final int id;
-    private final int idPropiedad;
-    private final float coeficienteCopropiedad; //Al insertar en BD hacerlo con valor de 1.
-    private final String matriculaInmobiliaria;
-    private final String referenciaCatastral;
+    public BienPrivado(){}
+
+    private Integer id;
+    private PropiedadHorizontal idPropiedad;
+    private Float coeficienteCopropiedad;
+    private String matriculaInmobiliaria;
+    private String referenciaCatastral;
 
 }

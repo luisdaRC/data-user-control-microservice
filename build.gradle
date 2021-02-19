@@ -17,15 +17,19 @@ ext {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 
     compile( [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'])
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
     implementation "io.springfox:springfox-swagger2:$swagger_version"
     implementation "io.springfox:springfox-swagger-ui:$swagger_version"

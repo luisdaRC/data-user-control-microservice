@@ -20,8 +20,5 @@ public interface PersonalApoyoRepository {
     PersonalApoyo changeEstado (String tipoDoc, String numDoc, String rol, Integer idPropiedad, Boolean estado);
 
     //Search by tipo an num, and update the others
-    PersonalApoyo updatePersonalByEstadoAndEmailAndPass (Boolean estado, String  email, String pass, String tipoDoc, String numDoc);
+    PersonalApoyo updateEstadoAndEmailAndPassByTipoAndNumDoc (Boolean estado, String  email, String pass, String tipoDoc, String numDoc);
 }
-    // Listo, básicamente de los endpoints-controllers (infra-adapter, se adapta al shape de los DTO's)
-    // se llaman a los Commands en application (ports, se expone lo que hay en domain)
-    // y luego a los services en domain (domain+use cases, the core).

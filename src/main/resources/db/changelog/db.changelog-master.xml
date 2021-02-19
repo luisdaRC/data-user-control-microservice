@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="control" author="Luis Daniel Castellar">
+
+        <!--Tabla Propiedad Horizontal-->
+
+        <!--createTable tableName="propiedadhorizontal">
+            <column name="idpropiedadhorizontal" type="integer">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="nombre" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="direccion" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable-->
+
+        <!--Tabla Bien Privado-->
+
+        <!--createTable tableName="bienprivado">
+            <column name="idbienprivado" type="integer">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="coeficientecopropiedad" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="matriculainmobiliaria" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="referenciacatastral" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="propiedadhorizontal_idph" type="integer">
+                <constraints nullable="false" foreignKeyName="bienprivado_propiedadhorizontal_idph_fkey" references="propiedadhorizontal(idpropiedadhorizontal)"/>
+            </column>
+        </createTable-->
+
+        <!--Tabla Personal Apoyo-->
+
+        <!--createTable tableName="personalapoyo">
+            <column name="idpersonalapoyo" type="integer" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pass" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="estado" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rol" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombres" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numerodocumento" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipodocumento" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="propiedadhorizontal_idph" type="integer">
+                <constraints nullable="false" foreignKeyName="personalapoyo_propiedadhorizontal_idph_fkey" references="propiedadhorizontal(idpropiedadhorizontal)"/>
+            </column>
+        </createTable-->
+
+        <!--Tabla Persona-->
+
+        <!--createTable tableName="persona">
+            <column name="idpersona" type="integer">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombres" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apellidos" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipodocumento" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numerodocumento" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rol" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="propiedadhorizontal_idph" type="integer">
+                <constraints nullable="false" foreignKeyName="persona_bienprivado_idbienprivado_fkey" references="bienprivado(idbienprivado)"/>
+            </column>
+        </createTable-->
+
+
+    </changeSet>
+
+</databaseChangeLog>
+
+        <!--Los posibles errores que se marquen en dominio son a causa del
+        cambio de las llaves foráneas a el tipo de objeto que mapean
+
+        Atento al <map-key-column> en propiedadhorizontal.xml por si no funciona-->

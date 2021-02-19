@@ -1,23 +1,24 @@
 package co.edu.unicartagena.control.domain.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PersonalApoyo {
 
-    private final int idPropiedad;
-    private final String email;
-    private final String pass;
-    private final Boolean estado;
-    private final String rol;
-    private final String nombres;
-    private final String numeroDocumento;
-    private final String tipoDocumento;
+    public PersonalApoyo(){}
+
+    private Integer id;
+    private PropiedadHorizontal idPropiedad;
+    private String email;
+    private String pass;
+    private Boolean estado;
+    private String rol;
+    private String nombres;
+    private String numeroDocumento;
+    private String tipoDocumento;
 
 }

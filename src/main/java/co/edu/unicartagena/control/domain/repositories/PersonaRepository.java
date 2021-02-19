@@ -7,5 +7,5 @@ import java.util.List;
 public interface PersonaRepository {
     Persona save(Persona persona);
     List<Persona> findByIdPropiedad(Integer idPropiedad);
-    List<Persona> saveAll(List<Persona> personas);
+    //List<Persona> saveAll(List<Persona> personas);
 }

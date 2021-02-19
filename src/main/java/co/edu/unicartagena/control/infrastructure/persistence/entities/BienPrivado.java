@@ -2,9 +2,9 @@ package co.edu.unicartagena.control.infrastructure.persistence.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+/*
 @Entity
-@Table(name = "BienPrivado")
+@Table(name = "BienPrivado")*/
 public class BienPrivado implements Serializable {
 
     @Id
@@ -16,7 +16,7 @@ public class BienPrivado implements Serializable {
     private PropiedadHorizontal idPropiedad;
 
     @Column(name = "coeficienteCopropiedad")
-    private float coeficienteCopropiedad;
+    private Float coeficienteCopropiedad;
 
     @Column(name = "matriculaInmobiliaria")
     private String matriculaInmobiliaria;
