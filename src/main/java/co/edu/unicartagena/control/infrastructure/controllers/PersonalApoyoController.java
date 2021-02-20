@@ -117,3 +117,25 @@ public class PersonalApoyoController {
     }
 
 }
+
+
+/**
+ * Bro, configure: Global CORS configuration
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

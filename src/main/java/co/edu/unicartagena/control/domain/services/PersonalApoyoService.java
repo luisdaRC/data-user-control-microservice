@@ -30,7 +30,7 @@ public class PersonalApoyoService {
         Optional<PropiedadHorizontal> existePropiedad = propiedadHorizontalRepository
                 .findPHById(personalApoyo.getIdPropiedad().getId());
 
-        if(existePropiedad.isEmpty()) {
+        if(!existePropiedad.isPresent()) {
             log.debug("No existe la propiedad con id {}",personalApoyo.getIdPropiedad());
             throw new BusinessException("No existe la propiedad referenciada");
         }
@@ -100,7 +100,7 @@ public class PersonalApoyoService {
         log.debug("Verificando existencia de user con email {} en el sistema",email);
         Optional<PersonalApoyo> personal = personalApoyoRepository.findByEmail(email);
 
-        if(personal.isEmpty()){
+        if(!personal.isPresent()){
             log.debug("Usuario inexistente");
             throw new BusinessException("Usuario inexistente");
         }

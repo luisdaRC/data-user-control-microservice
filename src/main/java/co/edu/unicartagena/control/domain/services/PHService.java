@@ -58,7 +58,7 @@ public class PHService {
         Optional<List<BienPrivado>> existenBienes = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad().getId());
 
         // If there are no "bienes" in that property, then they all are stored in database
-        if (existenBienes.isEmpty()){
+        if (!existenBienes.isPresent()){
             log.debug("Propiedad #: {} con datos de personas vacios, insertándolos.", bienPrivados.get(0).getIdPropiedad());
             /*bienPrivadoRepository.saveAll(bienPrivados);
             return personaRepository.saveAll(personas);*/
