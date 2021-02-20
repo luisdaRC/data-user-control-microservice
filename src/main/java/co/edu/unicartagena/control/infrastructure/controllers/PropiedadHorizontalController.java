@@ -22,8 +22,6 @@ public class PropiedadHorizontalController {
     // Analyze sequence of method or classes calling in both of those projects and determine how can i do
     // to build my own sequence in these components.
 
-    // In persistence, i could use Mapper, Record and DAO patterns(already implemented). Use it.
-
     // https://medium.com/@soyjuanmalopez/clean-architecture-en-la-vida-real-9da710e5ad4a
     // https://github.com/soyjuanmalopez/clean-architecture/tree/b80aac9e03be5f21d31ea4589556db39a5f38633
     // Give a sight to these links and follow the flow of the data there,
@@ -42,8 +40,9 @@ public class PropiedadHorizontalController {
      * No es necesario verificar si existe la propiedad dado que la validación está hecho en el front
      * */
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PropiedadHorizontalDTO registrarPropiedadHorizontal(@RequestBody PropiedadHorizontalDTO propiedadHorizontalDTO){
-        return registrarPHCommand.ejecutar(propiedadHorizontalDTO);
+    public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody PropiedadHorizontalDTO propiedadHorizontalDTO){
+        return ResponseEntity.ok()
+                .body(registrarPHCommand.ejecutar(propiedadHorizontalDTO));
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

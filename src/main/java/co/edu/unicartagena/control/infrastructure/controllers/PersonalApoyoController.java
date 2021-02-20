@@ -32,20 +32,24 @@ public class PersonalApoyoController {
     }
 
     @PostMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonalApoyoDTO registrarRevisor(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
+    public ResponseEntity<Object> registrarRevisor(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-            return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+            return ResponseEntity.ok()
+                    .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
+
         } catch (Exception e){
             throw new BusinessException("Ocurrió un error al registrar el revisor");
         }
     }
 
     @PostMapping(value = "/secretary", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonalApoyoDTO registrarSecretario(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
+    public ResponseEntity<Object> registrarSecretario(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-            return registrarPersonalCommand.ejecutar(personalApoyoDTO1);
+            return ResponseEntity.ok()
+                    .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
+
         } catch (Exception e){
             throw new BusinessException("Ocurrió un error al registrar el secretario");
         }
@@ -74,10 +78,12 @@ public class PersonalApoyoController {
     }
 
     @PatchMapping(value = "/patch", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonalApoyoDTO patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
+    public ResponseEntity<Object> patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
-            return patchPersonalCommand.ejecutar(personalApoyoDTO1);
+            return ResponseEntity.ok()
+                    .body(patchPersonalCommand.ejecutar(personalApoyoDTO1));
+
         } catch (Exception e){
             throw new BusinessException("El usuario no está registrado en el sistema");
         }
