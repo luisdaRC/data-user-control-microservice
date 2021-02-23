@@ -1,12 +1,15 @@
 package co.edu.unicartagena.control.infrastructure.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -39,7 +42,7 @@ public class CrossOrigin implements Filter {
 }
 */
 
-
+/*
 @EnableWebSecurity
 public class CrossOrigin extends WebSecurityConfigurerAdapter {
 
@@ -60,4 +63,28 @@ public class CrossOrigin extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+}
+*/
+
+@Configuration
+public class CrossOrigin{
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry){
+                registry.addMapping("/*")
+                        //.allowedMethods("GET","POST")
+                        //.allowedHeaders("*")
+                        .allowedOrigins("https://votaciones-sgph.herokuapp.com/");
+            }
+        };
+    }
+
+
+
+
+
+
+
 }
