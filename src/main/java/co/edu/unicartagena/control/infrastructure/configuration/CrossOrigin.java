@@ -54,7 +54,8 @@ public class CrossOrigin extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("https://control-microservice.herokuapp.com/"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.addAllowedHeader("Access-Control-Allow-Origin");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
