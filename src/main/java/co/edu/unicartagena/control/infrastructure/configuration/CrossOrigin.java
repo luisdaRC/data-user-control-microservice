@@ -1,14 +1,18 @@
 package co.edu.unicartagena.control.infrastructure.configuration;
 
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.Arrays;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
+/*
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CrossOrigin implements Filter {
@@ -31,5 +35,28 @@ public class CrossOrigin implements Filter {
         } else {
             chain.doFilter(req, res);
         }
+    }
+}
+*/
+
+
+@EnableWebSecurity
+public class CrossOrigin extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                // by default uses a Bean by the name of corsConfigurationSource
+                .cors(withDefaults());
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://control-microservice.herokuapp.com/"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
