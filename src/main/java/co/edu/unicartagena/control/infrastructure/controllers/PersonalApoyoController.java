@@ -28,7 +28,19 @@ public class PersonalApoyoController {
     EncodePassword encode;
 
     @Autowired
-    public PersonalApoyoController() {
+    public PersonalApoyoController(RegistrarPersonalCommand registrarPersonalCommand,
+            ExisteRevisorEnPHCommand existeRevisorEnPHCommand,
+            ExisteSecretaryEnPHCommand existeSecretaryEnPHCommand,
+            ObtenerPHCommand obtenerPHCommand,
+            PatchPersonalCommand patchPersonalCommand,
+            IniciarSesionCommand iniciarSesionCommand) {
+
+        this.registrarPersonalCommand = registrarPersonalCommand;
+        this.existeRevisorEnPHCommand = existeRevisorEnPHCommand;
+        this.existeSecretaryEnPHCommand = existeSecretaryEnPHCommand;
+        this.obtenerPHCommand = obtenerPHCommand;
+        this.patchPersonalCommand = patchPersonalCommand;
+        this.iniciarSesionCommand = iniciarSesionCommand;
     }
 
     @PostMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -117,25 +129,3 @@ public class PersonalApoyoController {
     }
 
 }
-
-
-/**
- * Bro, configure: Global CORS configuration
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,7 +9,7 @@ public class PropiedadHorizontalBuilder {
 
     public static PropiedadHorizontal crearPHDesdeDTO(PropiedadHorizontalDTO propiedadHorizontalDTO){
         return PropiedadHorizontal.builder()
-                .id(propiedadHorizontalDTO.getId())
+                .id(propiedadHorizontalDTO.getIdPh())
                 .nombre(propiedadHorizontalDTO.getNombre())
                 .tipo(propiedadHorizontalDTO.getTipo())
                 .direccion(propiedadHorizontalDTO.getDireccion())
@@ -18,7 +18,7 @@ public class PropiedadHorizontalBuilder {
 
     public static PropiedadHorizontalDTO crearPHDTODesdeEntidad(PropiedadHorizontal propiedadHorizontal){
         return PropiedadHorizontalDTO.builder()
-                .id(propiedadHorizontal.getId())
+                .idPh(propiedadHorizontal.getId())
                 .nombre(propiedadHorizontal.getNombre())
                 .tipo(propiedadHorizontal.getTipo())
                 .direccion(propiedadHorizontal.getDireccion())

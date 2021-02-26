@@ -33,12 +33,18 @@ public class PHService {
     public PropiedadHorizontal registrarPropiedad(PropiedadHorizontal propiedadHorizontal){
         log.debug("Se procede a registrar Propiedad Horizontal {} en el sistema.",
                 propiedadHorizontal.getNombre());
-        return propiedadHorizontalRepository.save(propiedadHorizontal);
+        System.out.println("Estoy en PHService, dominio");
+        return propiedadHorizontal;
+        //return propiedadHorizontalRepository.save(propiedadHorizontal);
     }
 
     public Boolean existePropiedad(String idPropiedad){
         log.debug("Verificando existencia de Propiedad con id {} en PHService",idPropiedad);
-        return propiedadHorizontalRepository.findPHById(Integer.parseInt(idPropiedad)).isPresent();
+        System.out.println("Verificando existencia de Propiedad con id en PHService: "+idPropiedad);
+        Boolean test = propiedadHorizontalRepository.findPHById(Integer.parseInt(idPropiedad)).isPresent();
+        System.out.println("Retorna de la DB: "+test);
+        return test;
+        //return idPropiedad.equals("39");
     }
 
     public PropiedadHorizontal obtenerPropiedad(String id){

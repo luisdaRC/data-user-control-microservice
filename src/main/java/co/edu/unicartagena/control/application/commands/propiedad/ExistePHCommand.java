@@ -16,6 +16,7 @@ public class ExistePHCommand implements Command<Boolean,String> {
     public ExistePHCommand(PHService phService){ this.phService = phService; }
 
     public Boolean ejecutar(String idPropiedad){
+        System.out.println("Veamos si existe un id PH: "+idPropiedad);
         log.debug("Ejecutando el comando: ExistePH con id de PH: {}", idPropiedad);
         return phService.existePropiedad(idPropiedad);
     }

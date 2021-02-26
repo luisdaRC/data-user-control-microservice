@@ -5,15 +5,18 @@ import co.edu.unicartagena.control.application.commands.propiedad.RegistrarPHCom
 import co.edu.unicartagena.control.application.commands.propiedad.UpdatePersonasYBienesCommand;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.application.dtos.PropiedadHorizontalDTO;
+import co.edu.unicartagena.control.domain.exceptions.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 @RestController
 @RequestMapping("/propiedad-horizontal")
 public class PropiedadHorizontalController {
@@ -34,25 +37,48 @@ public class PropiedadHorizontalController {
     UpdatePersonasYBienesCommand updatePersonasYBienesCommand;
 
     @Autowired
-    public PropiedadHorizontalController() {}
+    public PropiedadHorizontalController(RegistrarPHCommand registrarPHCommand,
+            ExistePHCommand existePHCommand,
+            UpdatePersonasYBienesCommand updatePersonasYBienesCommand) {
+
+        this.registrarPHCommand = registrarPHCommand;
+        this.existePHCommand = existePHCommand;
+        this.updatePersonasYBienesCommand = updatePersonasYBienesCommand;
+        //Done, now test. START BROWSER WITH PREVIOUSLY CLOSED TABS
+    }
 
     /**
      * No es necesario verificar si existe la propiedad dado que la validación está hecho en el front
+     *
+     *
+     *
+     * It looks like there is an issue in the way i'm sending the post request from front.
+     *
+     * The test in Insomnia served.
+     *
+     * Keep testing and modify the front code
      * */
-    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody PropiedadHorizontalDTO propiedadHorizontalDTO){
+        System.out.println("Entra a registrar propiedad");
         return ResponseEntity.ok()
                 .body(registrarPHCommand.ejecutar(propiedadHorizontalDTO));
     }
 
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> existePropiedadHorizontal(
             @RequestParam(name = "idPropiedadHorizontal") String idPropiedad){
 
-        boolean exist = existePHCommand.ejecutar(idPropiedad);
+        log.debug("Entra a existePH");
+        System.out.println("Entra a existePH: "+idPropiedad);
+
+        Boolean exist = existePHCommand.ejecutar(idPropiedad);
+
+        log.debug("Asigna boolean");
 
         Map<Object,Object> model = new HashMap<>();
         model.put("existePH", exist);
+        System.out.println("Asigna y retorna boolean");
         return ResponseEntity.ok().body(model);
     }
 

@@ -27,7 +27,7 @@ dependencies {
     // runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 
-    compile( [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'])
+    compile( [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.4'])
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
