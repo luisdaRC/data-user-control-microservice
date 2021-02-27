@@ -11,7 +11,7 @@ import lombok.ToString;
 @Builder
 public class PersonaDTO {
 
-    private final int idPersona;
+    private final Integer idPersona;
     private final String nombres;
     private final String apellidos;
     private final String numeroDocumento;

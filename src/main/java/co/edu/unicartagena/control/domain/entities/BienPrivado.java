@@ -12,7 +12,8 @@ public class BienPrivado {
     public BienPrivado(){}
 
     private Integer id;
-    private PropiedadHorizontal idPropiedad;
+    //private PropiedadHorizontal idPropiedad;
+    private Integer idPropiedad;
     private Float coeficienteCopropiedad;
     private String matriculaInmobiliaria;
     private String referenciaCatastral;

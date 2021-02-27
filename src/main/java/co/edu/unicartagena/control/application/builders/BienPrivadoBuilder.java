@@ -8,22 +8,20 @@ public class BienPrivadoBuilder {
 
     public BienPrivadoBuilder(){}
 
-    public BienPrivado crearBienPrivadoDesdeDTO(BienPrivadoDTO bienPrivadoDTO){
+    public static BienPrivado crearBienPrivadoDesdeDTO(BienPrivadoDTO bienPrivadoDTO){
         return BienPrivado.builder()
                 .id(bienPrivadoDTO.getId())
-                .idPropiedad(
-                        PropiedadHorizontal.builder().id(bienPrivadoDTO.getIdPropiedad()).build()
-                )
+                .idPropiedad(bienPrivadoDTO.getIdPropiedadHorizontal())
                 .coeficienteCopropiedad((float) 1)
                 .matriculaInmobiliaria(bienPrivadoDTO.getMatriculaInmobiliaria())
                 .referenciaCatastral(bienPrivadoDTO.getReferenciaCatastral())
                 .build();
     }
 
-    public BienPrivadoDTO crearBienPrivadoDTODesdeEntidad(BienPrivado bienPrivado){
+    public static BienPrivadoDTO crearBienPrivadoDTODesdeEntidad(BienPrivado bienPrivado){
         return BienPrivadoDTO.builder()
                 .id(bienPrivado.getId())
-                .idPropiedad(bienPrivado.getIdPropiedad().getId())
+                .idPropiedadHorizontal(bienPrivado.getId())
                 .matriculaInmobiliaria(bienPrivado.getMatriculaInmobiliaria())
                 .referenciaCatastral(bienPrivado.getReferenciaCatastral())
                 .build();

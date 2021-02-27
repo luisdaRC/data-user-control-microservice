@@ -34,8 +34,8 @@ public class PHService {
         log.debug("Se procede a registrar Propiedad Horizontal {} en el sistema.",
                 propiedadHorizontal.getNombre());
         System.out.println("Estoy en PHService, dominio");
-        return propiedadHorizontal;
-        //return propiedadHorizontalRepository.save(propiedadHorizontal);
+        //return propiedadHorizontal;
+        return propiedadHorizontalRepository.save(propiedadHorizontal);
     }
 
     public Boolean existePropiedad(String idPropiedad){
@@ -44,7 +44,6 @@ public class PHService {
         Boolean test = propiedadHorizontalRepository.findPHById(Integer.parseInt(idPropiedad)).isPresent();
         System.out.println("Retorna de la DB: "+test);
         return test;
-        //return idPropiedad.equals("39");
     }
 
     public PropiedadHorizontal obtenerPropiedad(String id){
@@ -61,9 +60,12 @@ public class PHService {
     public List<Persona> updateData(List<Persona> personas, List<BienPrivado> bienPrivados) {
         log.debug("Actualizando datos de la propiedad #: {}", bienPrivados.get(0).getIdPropiedad());
 
-        Optional<List<BienPrivado>> existenBienes = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad().getId());
+        Optional<List<BienPrivado>> existenBienes = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getId());
 
         // If there are no "bienes" in that property, then they all are stored in database
+
+        System.out.println("Vamo a ver si esto existen bienes en update"+existenBienes.isPresent());
+
         if (!existenBienes.isPresent()){
             log.debug("Propiedad #: {} con datos de personas vacios, insertándolos.", bienPrivados.get(0).getIdPropiedad());
             /*bienPrivadoRepository.saveAll(bienPrivados);
@@ -71,11 +73,11 @@ public class PHService {
             List<Persona> listP = new ArrayList<Persona>();
             List<BienPrivado> listB = new ArrayList<BienPrivado>();
 
-            for(Persona p:personas)
-                listP.add(personaRepository.save(p));
-
             for(BienPrivado b:bienPrivados)
                 listB.add(bienPrivadoRepository.save(b));
+
+            for(Persona p:personas)
+                listP.add(personaRepository.save(p));
 
             return listP;
 
@@ -84,7 +86,7 @@ public class PHService {
 
         // Otherwise, we proceed to compare the results of the database with the new list
         // from the core and insert the missing ones
-        List<Persona> existenPersonas = personaRepository.findByIdPropiedad(bienPrivados.get(0).getIdPropiedad().getId());
+        List<Persona> existenPersonas = personaRepository.findByIdPropiedad(bienPrivados.get(0).getId());
 
         log.debug("Actualizando datos faltantes de personas en la propiedad #: {}", bienPrivados.get(0).getIdPropiedad());
         List<Persona> listP = new ArrayList<Persona>();

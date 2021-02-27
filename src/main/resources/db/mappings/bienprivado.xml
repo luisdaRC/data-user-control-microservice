@@ -16,6 +16,10 @@
                 <column name="idbienprivado"/>
             </id>
 
+            <basic name="idPropiedad">
+                <column name="propiedadhorizontal_idph"/>
+            </basic>
+
             <basic name="coeficienteCopropiedad">
                 <column name="coeficientecopropiedad"/>
             </basic>
@@ -28,9 +32,9 @@
                 <column name="referenciacatastral"/>
             </basic>
 
-            <many-to-one name="idPropiedad" target-entity="co.edu.unicartagena.control.domain.entities.PropiedadHorizontal" optional="true">
+            <!--many-to-one name="idPropiedad" target-entity="co.edu.unicartagena.control.domain.entities.PropiedadHorizontal" optional="true">
                 <join-column name="propiedadhorizontal_idph" referenced-column-name="idpropiedadhorizontal"/>
-            </many-to-one>
+            </many-to-one-->
 
         </attributes>
     </entity>

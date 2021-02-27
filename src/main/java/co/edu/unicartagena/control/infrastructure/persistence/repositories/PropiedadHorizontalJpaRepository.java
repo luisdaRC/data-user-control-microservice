@@ -18,4 +18,6 @@ public interface PropiedadHorizontalJpaRepository extends JpaRepository<Propieda
     //@Query("select u from PropiedadHorizontal u where u.idPropiedadHorizontal = :id")
     @Query(value = "SELECT * FROM propiedadhorizontal WHERE idpropiedadhorizontal = :id", nativeQuery = true)
     Optional<PropiedadHorizontal> findPHById (@Param("id") Integer id);
+
+    PropiedadHorizontal save(PropiedadHorizontal propiedadHorizontal);
 }

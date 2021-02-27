@@ -16,11 +16,15 @@
                 <column name="idpersona"/>
             </id>
 
+            <basic name="idBienPrivado">
+                <column name="bienprivado_idbienprivado"/>
+            </basic>
+
             <basic name="nombres">
                 <column name="nombres"/>
             </basic>
 
-            <basic name="apellidos">
+            <basic name="apellido">
                 <column name="apellidos"/>
             </basic>
 
@@ -36,9 +40,9 @@
                 <column name="rol"/>
             </basic>
 
-            <many-to-one name="idBienPrivado" target-entity="co.edu.unicartagena.control.domain.entities.BienPrivado">
+            <!--many-to-one name="idBienPrivado" target-entity="co.edu.unicartagena.control.domain.entities.BienPrivado">
                 <join-column name="bienprivado_idbienprivado" referenced-column-name="idbienprivado"/>
-            </many-to-one>
+            </many-to-one-->
 
         </attributes>
     </entity>

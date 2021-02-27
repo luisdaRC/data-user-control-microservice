@@ -5,7 +5,6 @@ import co.edu.unicartagena.control.application.commands.propiedad.RegistrarPHCom
 import co.edu.unicartagena.control.application.commands.propiedad.UpdatePersonasYBienesCommand;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.application.dtos.PropiedadHorizontalDTO;
-import co.edu.unicartagena.control.domain.exceptions.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +43,6 @@ public class PropiedadHorizontalController {
         this.registrarPHCommand = registrarPHCommand;
         this.existePHCommand = existePHCommand;
         this.updatePersonasYBienesCommand = updatePersonasYBienesCommand;
-        //Done, now test. START BROWSER WITH PREVIOUSLY CLOSED TABS
     }
 
     /**
@@ -59,10 +57,10 @@ public class PropiedadHorizontalController {
      * Keep testing and modify the front code
      * */
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody PropiedadHorizontalDTO propiedadHorizontalDTO){
+    public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody List<PropiedadHorizontalDTO> propiedadHorizontalDTO){
         System.out.println("Entra a registrar propiedad");
         return ResponseEntity.ok()
-                .body(registrarPHCommand.ejecutar(propiedadHorizontalDTO));
+                .body(registrarPHCommand.ejecutar(propiedadHorizontalDTO.get(0)));
     }
 
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -89,6 +87,7 @@ public class PropiedadHorizontalController {
      * */
     @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updatePersonasYBienes(@RequestBody List<PersonaListDTO> personaListDTO){
+        System.out.println("Entra a updatePersonas"+personaListDTO.get(0));
         return ResponseEntity.ok().body(updatePersonasYBienesCommand.ejecutar(personaListDTO));
     }
 
