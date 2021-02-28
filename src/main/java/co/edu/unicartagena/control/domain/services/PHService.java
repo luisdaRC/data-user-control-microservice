@@ -81,7 +81,7 @@ public class PHService {
 
             return listP;
 
-        } else if (existenBienes.stream().toArray().length == personas.size())
+        } else if (existenBienes.get().size() == personas.size())
             return personas;
 
         // Otherwise, we proceed to compare the results of the database with the new list
