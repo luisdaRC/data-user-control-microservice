@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface BienPrivadoRepository {
     BienPrivado save(BienPrivado bienPrivado);
     Optional<List<BienPrivado>> findByIdPropiedad(Integer idPropiedad);
-    //List<BienPrivado> saveAll(List<BienPrivado> bienPrivados);
+
 }

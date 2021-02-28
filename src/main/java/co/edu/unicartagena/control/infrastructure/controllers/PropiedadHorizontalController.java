@@ -20,17 +20,6 @@ import java.util.Map;
 @RequestMapping("/propiedad-horizontal")
 public class PropiedadHorizontalController {
 
-    // Los métodos del core llaman services y las del access los GET son con querys y POSTS con command
-    // Analyze sequence of method or classes calling in both of those projects and determine how can i do
-    // to build my own sequence in these components.
-
-    // https://medium.com/@soyjuanmalopez/clean-architecture-en-la-vida-real-9da710e5ad4a
-    // https://github.com/soyjuanmalopez/clean-architecture/tree/b80aac9e03be5f21d31ea4589556db39a5f38633
-    // Give a sight to these links and follow the flow of the data there,
-    // compare with the flow in access control and identify how the hell
-    // is inserted the data in the database through repository
-    // https://github.com/damienbeaufils/spring-boot-clean-architecture-demo.
-    // Test the dummy project by running it.-------------THIS----------------
     RegistrarPHCommand registrarPHCommand;
     ExistePHCommand existePHCommand;
     UpdatePersonasYBienesCommand updatePersonasYBienesCommand;
@@ -47,14 +36,6 @@ public class PropiedadHorizontalController {
 
     /**
      * No es necesario verificar si existe la propiedad dado que la validación está hecho en el front
-     *
-     *
-     *
-     * It looks like there is an issue in the way i'm sending the post request from front.
-     *
-     * The test in Insomnia served.
-     *
-     * Keep testing and modify the front code
      * */
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody List<PropiedadHorizontalDTO> propiedadHorizontalDTO){
@@ -95,8 +76,6 @@ public class PropiedadHorizontalController {
     //https://github.com/luisdaRC/votations-frontend/blob/feature/revisor/src/app/services/sgph/propiedad-horizontal.service.ts
 
     //Keep with the implementation of PersonalApoyo login endpoint. Taking into account jwt settings and so on (regarding to core).
-
-    //Dedicate all the effort to login analysis and implementation in the core. The above!
 
 
 }

@@ -17,5 +17,4 @@ public interface BienPrivadoJpaRepository extends JpaRepository<BienPrivado,Inte
     @Query(value = "SELECT * FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad", nativeQuery = true)
     Optional<List<BienPrivado>> findByIdPropiedad(@Param("idPropiedad") Integer idPropiedad);
 
-    //List<BienPrivado> saveAll(List<BienPrivado> bienPrivados);
 }
