@@ -12,7 +12,7 @@ public class PersonalApoyo {
     public PersonalApoyo(){}
 
     private Integer id;
-    private PropiedadHorizontal idPropiedad;
+    private Integer idPropiedad;
     private String email;
     private String pass;
     private Boolean estado;

@@ -17,6 +17,10 @@
                 <generated-value strategy="IDENTITY"/>
             </id>
 
+            <basic name="idPropiedad">
+                <column name="propiedadhorizontal_idph"/>
+            </basic>
+
             <basic name="email">
                 <column name="email"/>
             </basic>
@@ -45,9 +49,9 @@
                 <column name="tipodocumento"/>
             </basic>
 
-            <many-to-one name="idPropiedad" target-entity="co.edu.unicartagena.control.domain.entities.PropiedadHorizontal" optional="true">
+            <!--many-to-one name="idPropiedad" target-entity="co.edu.unicartagena.control.domain.entities.PropiedadHorizontal" optional="true">
                 <join-column name="propiedadhorizontal_idph" referenced-column-name="idpropiedadhorizontal"/>
-            </many-to-one>
+            </many-to-one-->
 
         </attributes>
     </entity>

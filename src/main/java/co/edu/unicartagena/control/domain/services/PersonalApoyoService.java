@@ -27,16 +27,23 @@ public class PersonalApoyoService {
 
     public PersonalApoyo registrarPersonal(PersonalApoyo personalApoyo){
 
+        System.out.println("Llega a registrarService");
         Optional<PropiedadHorizontal> existePropiedad = propiedadHorizontalRepository
-                .findPHById(personalApoyo.getIdPropiedad().getId());
+                .findPHById(personalApoyo.getIdPropiedad());
+
+        System.out.println("Qué tiene existePropiedad?: "+existePropiedad.toString());
+        System.out.println("Qué tiene existePropiedad en bool?: "+existePropiedad.isPresent());
 
         if(!existePropiedad.isPresent()) {
             log.debug("No existe la propiedad con id {}",personalApoyo.getIdPropiedad());
             throw new BusinessException("No existe la propiedad referenciada");
         }
 
-        Optional<PersonalApoyo> existePersonalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad().getId(),
+        Optional<PersonalApoyo> existePersonalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
                 personalApoyo.getRol(),personalApoyo.getEstado());
+
+        System.out.println("Qué tiene existePersonalActivo?: "+existePersonalActivo.toString());
+        System.out.println("Qué tiene existePersonalActivo en bool?: "+existePersonalActivo.isPresent());
 
         if(existePersonalActivo.isPresent()) {
             log.debug("El usuario de {} de la propiedad está activo en el sistema. Eliminelo para nuevo registro",
@@ -47,14 +54,20 @@ public class PersonalApoyoService {
 
         Optional<PersonalApoyo> existeEmail = personalApoyoRepository.findByEmail(personalApoyo.getEmail());
 
+        System.out.println("Qué tiene existeEmail?: "+existeEmail.toString());
+        System.out.println("Qué tiene existeEmail en bool?: "+existeEmail.isPresent());
+
         if(existeEmail.isPresent()) {
             log.debug("Existe un usuario con el email ingresado");
             throw new BusinessException("Existe un usuario con el email ingresado");
         }
 
         Optional<PersonalApoyo> actualizarPersonal = personalApoyoRepository
-                .findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc(personalApoyo.getIdPropiedad().getId(),personalApoyo.getRol(),
+                .findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc(personalApoyo.getIdPropiedad(),personalApoyo.getRol(),
                         personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento());
+
+        System.out.println("Qué tiene existePersonalActivo?: "+actualizarPersonal.toString());
+        System.out.println("Qué tiene existePersonalActivo en bool?: "+actualizarPersonal.isPresent());
 
         if(actualizarPersonal.isPresent()){
             log.debug("Actualizando datos de {} en el sistema", personalApoyo.getRol());
@@ -79,15 +92,16 @@ public class PersonalApoyoService {
 
     public PersonalApoyo patchPersonal(PersonalApoyo personalApoyo){
 
-        log.debug("Verificando existencia de {} en el sistema",personalApoyo.getRol());
-        Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad().getId(),
-                personalApoyo.getRol(),personalApoyo.getEstado());
+        System.out.println("Verificando existencia de " +personalApoyo.getRol()+ " en el sistema");
+        Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
+                personalApoyo.getRol(),true);
+
+        System.out.println("Qué hay en existePersonal: "+existePersonal.toString());
 
         if(existePersonal.isPresent()) {
-            log.debug("Se procede a actualizar el {} en el sistema.",
-                    personalApoyo.getRol());
+            System.out.println("Se procede a actualizar el "+personalApoyo.getRol()+" en el sistema.");
             return personalApoyoRepository.changeEstado(personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento(),
-                    personalApoyo.getRol(),personalApoyo.getIdPropiedad().getId(),personalApoyo.getEstado());
+                    personalApoyo.getRol(),personalApoyo.getIdPropiedad(),personalApoyo.getEstado());
         }
 
         log.debug("El {} con número de identificación {} no está registrado en el sistema",

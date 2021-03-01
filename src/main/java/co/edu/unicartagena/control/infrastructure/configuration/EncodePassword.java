@@ -1,26 +1,39 @@
 package co.edu.unicartagena.control.infrastructure.configuration;
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.application.dtos.UserRequestDTO;
+import co.edu.unicartagena.control.application.dtos.DataPersonalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EncodePassword {
 
-    @Autowired
+
     PasswordEncoder passwordEncoder;
 
-    public EncodePassword(){}
+    @Autowired
+    public EncodePassword(PasswordEncoder passwordEncoder){
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public PersonalApoyoDTO encodePassword(PersonalApoyoDTO personalApoyoDTO){
+        System.out.println("Llega a encode");
+        DataPersonalDTO dataPersonalDTO =
+                new DataPersonalDTO(personalApoyoDTO.getDataPersonal().getEmail(),
+                passwordEncoder.encode(personalApoyoDTO.getDataPersonal().getPassword()),
+                personalApoyoDTO.getDataPersonal().getNombres(),
+                personalApoyoDTO.getDataPersonal().getNumeroDocumento(),
+                personalApoyoDTO.getDataPersonal().getTipoDocumento()
+                );
+
+        System.out.println("Asigna objeto: "+dataPersonalDTO);
+
         return PersonalApoyoDTO.builder()
-                .idPropiedad(personalApoyoDTO.getIdPropiedad())
-                .email(personalApoyoDTO.getEmail())
-                .pass(passwordEncoder.encode(personalApoyoDTO.getPass()))
+                .idPropiedadHorizontal(personalApoyoDTO.getIdPropiedadHorizontal())
                 .estado(personalApoyoDTO.getEstado())
                 .rol(personalApoyoDTO.getRol())
-                .nombres(personalApoyoDTO.getNombres())
-                .numeroDocumento(personalApoyoDTO.getNumeroDocumento())
-                .tipoDocumento(personalApoyoDTO.getTipoDocumento())
+                .dataPersonal(dataPersonalDTO)
                 .build();
     }
 

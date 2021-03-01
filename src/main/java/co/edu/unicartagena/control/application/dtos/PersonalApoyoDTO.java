@@ -11,12 +11,8 @@ import lombok.ToString;
 @Builder
 public class PersonalApoyoDTO {
 
-    private final int idPropiedad;
-    private final String email;
-    private final String pass;
+    private final Integer idPropiedadHorizontal;
     private final Boolean estado;
     private final String rol;
-    private final String nombres;
-    private final String numeroDocumento;
-    private final String tipoDocumento;
+    private final DataPersonalDTO dataPersonal;
 }

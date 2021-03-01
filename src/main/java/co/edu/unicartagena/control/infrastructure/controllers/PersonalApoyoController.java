@@ -33,7 +33,8 @@ public class PersonalApoyoController {
             ExisteSecretaryEnPHCommand existeSecretaryEnPHCommand,
             ObtenerPHCommand obtenerPHCommand,
             PatchPersonalCommand patchPersonalCommand,
-            IniciarSesionCommand iniciarSesionCommand) {
+            IniciarSesionCommand iniciarSesionCommand,
+            EncodePassword encode) {
 
         this.registrarPersonalCommand = registrarPersonalCommand;
         this.existeRevisorEnPHCommand = existeRevisorEnPHCommand;
@@ -41,17 +42,22 @@ public class PersonalApoyoController {
         this.obtenerPHCommand = obtenerPHCommand;
         this.patchPersonalCommand = patchPersonalCommand;
         this.iniciarSesionCommand = iniciarSesionCommand;
+        this.encode = encode;
     }
 
     @PostMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registrarRevisor(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
+            System.out.println("Primero");
+            System.out.println(personalApoyoDTO);
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
+            System.out.println("Pasa encode");
             return ResponseEntity.ok()
                     .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
 
         } catch (Exception e){
             throw new BusinessException("Ocurrió un error al registrar el revisor");
+            //return ResponseEntity.status(500).body("Fallo al registrar Revisor");
         }
     }
 
@@ -92,9 +98,10 @@ public class PersonalApoyoController {
     @PatchMapping(value = "/patch", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
-            PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
+            System.out.println("EN patchPersonal Controller");
+            System.out.println(personalApoyoDTO);
             return ResponseEntity.ok()
-                    .body(patchPersonalCommand.ejecutar(personalApoyoDTO1));
+                    .body(patchPersonalCommand.ejecutar(personalApoyoDTO));
 
         } catch (Exception e){
             throw new BusinessException("El usuario no está registrado en el sistema");
@@ -107,14 +114,14 @@ public class PersonalApoyoController {
             UserRequestDTO user = encode.encodePassword(body);
             PersonalApoyoDTO personal = iniciarSesionCommand.ejecutar(user);
 
-            String idPh = String.valueOf(personal.getIdPropiedad());
+            String idPh = String.valueOf(personal.getIdPropiedadHorizontal());
             PropiedadHorizontalDTO ph = obtenerPHCommand.ejecutar(idPh);
 
             Map<Object, Object> model = new HashMap<>();
-            model.put("email", personal.getEmail());
-            model.put("nombres", personal.getNombres());
+            model.put("email", personal.getDataPersonal().getEmail());
+            model.put("nombres", personal.getDataPersonal().getNombres());
             model.put("rol", personal.getRol());
-            model.put("idPropiedadHorizontal", idPh);
+            model.put("idPropiedadHorizontal", personal.getIdPropiedadHorizontal());
             model.put("nombrePH", ph.getNombre());
 
             return ResponseEntity

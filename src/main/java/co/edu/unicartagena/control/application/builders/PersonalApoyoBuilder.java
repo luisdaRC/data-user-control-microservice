@@ -1,8 +1,8 @@
 package co.edu.unicartagena.control.application.builders;
 
+import co.edu.unicartagena.control.application.dtos.DataPersonalDTO;
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.domain.entities.PersonalApoyo;
-import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 
 public class PersonalApoyoBuilder {
 
@@ -10,28 +10,31 @@ public class PersonalApoyoBuilder {
 
     public static PersonalApoyo crearPersonalApoyodesdeDTO(PersonalApoyoDTO personalApoyoDTO){
         return PersonalApoyo.builder()
-                .idPropiedad(
-                        PropiedadHorizontal.builder().id(personalApoyoDTO.getIdPropiedad()).build())
-                .email(personalApoyoDTO.getEmail().toLowerCase())
-                .pass(personalApoyoDTO.getPass())
+                .idPropiedad(personalApoyoDTO.getIdPropiedadHorizontal())
                 .estado(personalApoyoDTO.getEstado())
                 .rol(personalApoyoDTO.getRol())
-                .nombres(personalApoyoDTO.getNombres())
-                .numeroDocumento(personalApoyoDTO.getNumeroDocumento())
-                .tipoDocumento(personalApoyoDTO.getTipoDocumento())
+                .email(personalApoyoDTO.getDataPersonal().getEmail().toLowerCase())
+                .pass(personalApoyoDTO.getDataPersonal().getPassword())
+                .nombres(personalApoyoDTO.getDataPersonal().getNombres())
+                .numeroDocumento(personalApoyoDTO.getDataPersonal().getNumeroDocumento())
+                .tipoDocumento(personalApoyoDTO.getDataPersonal().getTipoDocumento())
                 .build();
     }
 
     public static PersonalApoyoDTO crearPersonalApoyoDTODesdeEntidad(PersonalApoyo personalApoyo){
+        DataPersonalDTO dataPersonalDTO =
+                new DataPersonalDTO(personalApoyo.getEmail(),
+                        personalApoyo.getPass(),
+                        personalApoyo.getNombres(),
+                        personalApoyo.getNumeroDocumento(),
+                        personalApoyo.getTipoDocumento()
+                );
+
         return PersonalApoyoDTO.builder()
-                .idPropiedad(personalApoyo.getIdPropiedad().getId())
-                .email(personalApoyo.getEmail())
-                .pass(personalApoyo.getPass())
+                .idPropiedadHorizontal(personalApoyo.getIdPropiedad())
                 .estado(personalApoyo.getEstado())
                 .rol(personalApoyo.getRol())
-                .nombres(personalApoyo.getNombres())
-                .numeroDocumento(personalApoyo.getNumeroDocumento())
-                .tipoDocumento(personalApoyo.getTipoDocumento())
+                .dataPersonal(dataPersonalDTO)
                 .build();
     }
 }
