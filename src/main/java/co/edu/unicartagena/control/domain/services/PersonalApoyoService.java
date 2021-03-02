@@ -70,9 +70,10 @@ public class PersonalApoyoService {
         System.out.println("Qué tiene existePersonalActivo en bool?: "+actualizarPersonal.isPresent());
 
         if(actualizarPersonal.isPresent()){
-            log.debug("Actualizando datos de {} en el sistema", personalApoyo.getRol());
-            return personalApoyoRepository.updateEstadoAndEmailAndPassByTipoAndNumDoc(personalApoyo.getEstado(),
+            System.out.println("Actualizando datos de "+personalApoyo.getRol()+" en el sistema.");
+            personalApoyoRepository.updateEstadoAndEmailAndPassByTipoAndNumDoc(personalApoyo.getEstado(),
                     personalApoyo.getEmail(),personalApoyo.getPass(),personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento());
+            return actualizarPersonal.get();
         }
 
         log.debug("Se procede a registrar el {} en el sistema.",
@@ -96,12 +97,10 @@ public class PersonalApoyoService {
         Optional<PersonalApoyo> existePersonal = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
                 personalApoyo.getRol(),true);
 
-        System.out.println("Qué hay en existePersonal: "+existePersonal.toString());
-
         if(existePersonal.isPresent()) {
             System.out.println("Se procede a actualizar el "+personalApoyo.getRol()+" en el sistema.");
-            return personalApoyoRepository.changeEstado(personalApoyo.getTipoDocumento(),personalApoyo.getNumeroDocumento(),
-                    personalApoyo.getRol(),personalApoyo.getIdPropiedad(),personalApoyo.getEstado());
+            Integer response = personalApoyoRepository.changeEstado(existePersonal.get().getId(),personalApoyo.getEstado());
+            return existePersonal.get();
         }
 
         log.debug("El {} con número de identificación {} no está registrado en el sistema",
@@ -115,8 +114,8 @@ public class PersonalApoyoService {
         Optional<PersonalApoyo> personal = personalApoyoRepository.findByEmail(email);
 
         if(!personal.isPresent()){
-            log.debug("Usuario inexistente");
-            throw new BusinessException("Usuario inexistente");
+            log.debug("Correo inexistente");
+            throw new BusinessException("Correo inexistente");
         }
 
         if(!personal.get().getPass().equals(encodedPass)){

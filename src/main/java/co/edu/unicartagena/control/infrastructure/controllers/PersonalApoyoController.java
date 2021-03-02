@@ -97,21 +97,26 @@ public class PersonalApoyoController {
 
     @PatchMapping(value = "/patch", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
-        try {
+        //Averiguar por qué el update en el repository no está funcionando
+    //    try {
             System.out.println("EN patchPersonal Controller");
             System.out.println(personalApoyoDTO);
             return ResponseEntity.ok()
                     .body(patchPersonalCommand.ejecutar(personalApoyoDTO));
 
-        } catch (Exception e){
+    /*    } catch (Exception e){
             throw new BusinessException("El usuario no está registrado en el sistema");
-        }
+        }*/
     }
 
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> iniciarSesion(UserRequestDTO body) {
-        try {
+    public ResponseEntity<Object> iniciarSesion(@RequestBody UserRequestDTO body) {
+        //Entra al catch
+ //       try {
+        System.out.println("En body: "+body);
             UserRequestDTO user = encode.encodePassword(body);
+        System.out.println("La password encodeada pa comparar con la de la DB: "+user.getPassword());
+        // Los encodes son diferentes xD
             PersonalApoyoDTO personal = iniciarSesionCommand.ejecutar(user);
 
             String idPh = String.valueOf(personal.getIdPropiedadHorizontal());
@@ -127,12 +132,12 @@ public class PersonalApoyoController {
             return ResponseEntity
                     .ok()
                     .body(model);
-        } catch (Exception e){
+/*        } catch (Exception e){
 
             return ResponseEntity
                     .badRequest()
                     .body("Error al iniciar sesión");
-        }
+        }*/
     }
 
 }

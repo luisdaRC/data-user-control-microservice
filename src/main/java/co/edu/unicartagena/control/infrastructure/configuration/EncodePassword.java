@@ -40,7 +40,7 @@ public class EncodePassword {
     public UserRequestDTO encodePassword(UserRequestDTO userRequestDTO){
         return UserRequestDTO.builder()
                 .email(userRequestDTO.getEmail())
-                .pass(passwordEncoder.encode(userRequestDTO.getPass()))
+                .password(passwordEncoder.encode(userRequestDTO.getPassword()))
                 .build();
     }
 }

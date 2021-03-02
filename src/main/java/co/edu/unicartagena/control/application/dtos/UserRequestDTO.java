@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class UserRequestDTO {
 
-    private final String email;
-    private final String pass;
+    private String email;
+    private String password;
 }

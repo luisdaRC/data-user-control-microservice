@@ -29,16 +29,14 @@ public interface PersonalApoyoJpaRepository extends JpaRepository<PersonalApoyo,
 
 
     @Modifying
-    @Query(value = "UPDATE personalapoyo SET estado = :estado WHERE propiedadhorizontal_idph = :idPropiedad " +
-            "and tipodocumento = :tipoDoc and numerodocumento = :numDoc and rol = :rol", nativeQuery = true)
-    PersonalApoyo changeEstado (@Param("tipoDoc") String tipoDoc, @Param("numDoc") String numDoc, @Param("rol") String rol,
-                                @Param("idPropiedad") Integer idPropiedad, @Param("estado") Boolean estado);
+    @Query(value = "UPDATE personalapoyo SET estado = :estado WHERE idpersonalapoyo = :id", nativeQuery = true)
+    Integer changeEstado (@Param("id") Integer id, @Param("estado") Boolean estado);
 
 
     @Modifying
     @Query(value = "UPDATE personalapoyo SET email = :email, pass = :pass, estado = :estado " +
             "WHERE tipodocumento = :tipoDoc and numerodocumento = :numDoc", nativeQuery = true)
-    PersonalApoyo updateEstadoAndEmailAndPassByTipoAndNumDoc (@Param("estado") Boolean estado,
+    Integer updateEstadoAndEmailAndPassByTipoAndNumDoc (@Param("estado") Boolean estado,
                                                          @Param("email") String  email,
                                                          @Param("pass") String pass,
                                                          @Param("tipoDoc") String tipoDoc,

@@ -16,9 +16,9 @@ public interface PersonalApoyoRepository {
 
     PersonalApoyo save (PersonalApoyo personalApoyo);
 
-    //Search by tipoDoc, numDoc, rol and idPropiedad and insert estado
-    PersonalApoyo changeEstado (String tipoDoc, String numDoc, String rol, Integer idPropiedad, Boolean estado);
+    //Search by idPersonal and update estado
+    Integer changeEstado (Integer id, Boolean estado);
 
     //Search by tipo an num, and update the others
-    PersonalApoyo updateEstadoAndEmailAndPassByTipoAndNumDoc (Boolean estado, String  email, String pass, String tipoDoc, String numDoc);
+    Integer updateEstadoAndEmailAndPassByTipoAndNumDoc (Boolean estado, String  email, String pass, String tipoDoc, String numDoc);
 }
