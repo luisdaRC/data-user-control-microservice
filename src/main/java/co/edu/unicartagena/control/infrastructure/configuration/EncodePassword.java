@@ -2,7 +2,9 @@ package co.edu.unicartagena.control.infrastructure.configuration;
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.application.dtos.UserRequestDTO;
 import co.edu.unicartagena.control.application.dtos.DataPersonalDTO;
+import co.edu.unicartagena.control.domain.exceptions.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +39,8 @@ public class EncodePassword {
                 .build();
     }
 
-    public UserRequestDTO encodePassword(UserRequestDTO userRequestDTO){
-        return UserRequestDTO.builder()
-                .email(userRequestDTO.getEmail())
-                .password(passwordEncoder.encode(userRequestDTO.getPassword()))
-                .build();
+    public void comparePassword(String pass,String encodedPass){
+        BCryptPasswordEncoder comparer = new BCryptPasswordEncoder();
+        if (!comparer.matches(pass, encodedPass)) throw new BusinessException("Las contraseñas no coinciden");
     }
 }

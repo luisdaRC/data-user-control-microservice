@@ -112,12 +112,12 @@ public class PersonalApoyoController {
     @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> iniciarSesion(@RequestBody UserRequestDTO body) {
         //Entra al catch
- //       try {
+        try {
         System.out.println("En body: "+body);
-            UserRequestDTO user = encode.encodePassword(body);
-        System.out.println("La password encodeada pa comparar con la de la DB: "+user.getPassword());
-        // Los encodes son diferentes xD
-            PersonalApoyoDTO personal = iniciarSesionCommand.ejecutar(user);
+
+            PersonalApoyoDTO personal = iniciarSesionCommand.ejecutar(body);
+
+            encode.comparePassword(body.getPassword(),personal.getDataPersonal().getPassword());
 
             String idPh = String.valueOf(personal.getIdPropiedadHorizontal());
             PropiedadHorizontalDTO ph = obtenerPHCommand.ejecutar(idPh);
@@ -129,15 +129,17 @@ public class PersonalApoyoController {
             model.put("idPropiedadHorizontal", personal.getIdPropiedadHorizontal());
             model.put("nombrePH", ph.getNombre());
 
+            System.out.println("Despachado: "+model);
+
             return ResponseEntity
                     .ok()
                     .body(model);
-/*        } catch (Exception e){
+        } catch (Exception e){
 
             return ResponseEntity
                     .badRequest()
-                    .body("Error al iniciar sesión");
-        }*/
+                    .body("Error al iniciar sesión. Revise sus credenciales de acceso.");
+        }
     }
 
 }

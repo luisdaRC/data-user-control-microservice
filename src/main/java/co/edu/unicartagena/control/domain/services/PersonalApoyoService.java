@@ -109,19 +109,19 @@ public class PersonalApoyoService {
 
     }
 
-    public PersonalApoyo findPersonalByEmailAndPass(String email, String encodedPass){
+    public PersonalApoyo findPersonalByEmail(String email){
         log.debug("Verificando existencia de user con email {} en el sistema",email);
         Optional<PersonalApoyo> personal = personalApoyoRepository.findByEmail(email);
 
         if(!personal.isPresent()){
-            log.debug("Correo inexistente");
+            System.out.println("Correo inexistente");
             throw new BusinessException("Correo inexistente");
         }
-
+/*
         if(!personal.get().getPass().equals(encodedPass)){
             log.debug("Password incorrecto");
             throw new BusinessException("Password incorrecto");
-        }
+        }*/
 
         return personal.get();
     }

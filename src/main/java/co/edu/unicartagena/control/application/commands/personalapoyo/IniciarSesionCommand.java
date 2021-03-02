@@ -28,6 +28,6 @@ public class IniciarSesionCommand implements Command<PersonalApoyoDTO, UserReque
         log.debug("Ejecutando el comando: IniciarSesion");
         String email = userRequestDTO.getEmail().toLowerCase();
         return PersonalApoyoBuilder.crearPersonalApoyoDTODesdeEntidad(
-                personalApoyoService.findPersonalByEmailAndPass(email, userRequestDTO.getPassword()));
+                personalApoyoService.findPersonalByEmail(email));
     }
 }
