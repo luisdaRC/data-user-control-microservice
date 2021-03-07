@@ -9,7 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class PersonalApoyo {
 
-    public PersonalApoyo(){}
+    public PersonalApoyo() {
+    }
 
     private Integer id;
     private Integer idPropiedad;

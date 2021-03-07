@@ -5,14 +5,11 @@ import co.edu.unicartagena.control.application.commands.Command;
 import co.edu.unicartagena.control.application.dtos.PersonalApoyoDTO;
 import co.edu.unicartagena.control.application.dtos.UserRequestDTO;
 import co.edu.unicartagena.control.domain.services.PersonalApoyoService;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Log4j2
 @Service
 @Transactional
 public class IniciarSesionCommand implements Command<PersonalApoyoDTO, UserRequestDTO> {
@@ -20,12 +17,12 @@ public class IniciarSesionCommand implements Command<PersonalApoyoDTO, UserReque
     private final PersonalApoyoService personalApoyoService;
 
     @Autowired
-    public IniciarSesionCommand(PersonalApoyoService personalApoyoService){
+    public IniciarSesionCommand(PersonalApoyoService personalApoyoService) {
         this.personalApoyoService = personalApoyoService;
     }
 
-    public PersonalApoyoDTO ejecutar(UserRequestDTO userRequestDTO){
-        log.debug("Ejecutando el comando: IniciarSesion");
+    public PersonalApoyoDTO ejecutar(UserRequestDTO userRequestDTO) {
+        System.out.println("Ejecutando el comando: IniciarSesion");
         String email = userRequestDTO.getEmail().toLowerCase();
         return PersonalApoyoBuilder.crearPersonalApoyoDTODesdeEntidad(
                 personalApoyoService.findPersonalByEmail(email));

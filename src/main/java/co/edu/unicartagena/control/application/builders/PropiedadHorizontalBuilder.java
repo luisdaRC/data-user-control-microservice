@@ -5,9 +5,10 @@ import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 
 public class PropiedadHorizontalBuilder {
 
-    public PropiedadHorizontalBuilder () {}
+    public PropiedadHorizontalBuilder() {
+    }
 
-    public static PropiedadHorizontal crearPHDesdeDTO(PropiedadHorizontalDTO propiedadHorizontalDTO){
+    public static PropiedadHorizontal crearPHDesdeDTO(PropiedadHorizontalDTO propiedadHorizontalDTO) {
         return PropiedadHorizontal.builder()
                 .id(propiedadHorizontalDTO.getIdPh())
                 .nombre(propiedadHorizontalDTO.getNombre())
@@ -16,7 +17,7 @@ public class PropiedadHorizontalBuilder {
                 .build();
     }
 
-    public static PropiedadHorizontalDTO crearPHDTODesdeEntidad(PropiedadHorizontal propiedadHorizontal){
+    public static PropiedadHorizontalDTO crearPHDTODesdeEntidad(PropiedadHorizontal propiedadHorizontal) {
         return PropiedadHorizontalDTO.builder()
                 .idPh(propiedadHorizontal.getId())
                 .nombre(propiedadHorizontal.getNombre())

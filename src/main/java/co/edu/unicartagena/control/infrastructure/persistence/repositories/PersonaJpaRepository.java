@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PersonaJpaRepository extends JpaRepository<Persona,Integer>, PersonaRepository {
+public interface PersonaJpaRepository extends JpaRepository<Persona, Integer>, PersonaRepository {
 
-    //@Query("select u from Persona u where u.idBienPrivado.idPropiedad.idPropiedadHorizontal = :idPropiedad")
-    @Query(value = "SELECT * FROM persona WHERE bienprivado_idbienprivado = (SELECT idbienprivado FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad)", nativeQuery = true)
+    @Query(value = "SELECT persona.* FROM persona " +
+            "JOIN bienprivado ON persona.bienprivado_idbienprivado = bienprivado.idbienprivado " +
+            "JOIN propiedadhorizontal ON bienprivado.propiedadhorizontal_idph = :idPropiedad " +
+            "GROUP BY persona.idpersona", nativeQuery = true)
     List<Persona> findByIdPropiedad(@Param("idPropiedad") Integer idPropiedad);
 
-    //List<Persona> saveAll(List<Persona> personas);
 }

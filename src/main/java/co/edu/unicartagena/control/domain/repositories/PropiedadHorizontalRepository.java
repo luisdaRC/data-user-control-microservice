@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface PropiedadHorizontalRepository {
 
-    Optional<PropiedadHorizontal> findPHById (Integer id);
+    Optional<PropiedadHorizontal> findPHById(Integer id);
+
     PropiedadHorizontal save(PropiedadHorizontal propiedadHorizontal);
 }

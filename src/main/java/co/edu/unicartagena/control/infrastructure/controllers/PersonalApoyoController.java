@@ -29,12 +29,12 @@ public class PersonalApoyoController {
 
     @Autowired
     public PersonalApoyoController(RegistrarPersonalCommand registrarPersonalCommand,
-            ExisteRevisorEnPHCommand existeRevisorEnPHCommand,
-            ExisteSecretaryEnPHCommand existeSecretaryEnPHCommand,
-            ObtenerPHCommand obtenerPHCommand,
-            PatchPersonalCommand patchPersonalCommand,
-            IniciarSesionCommand iniciarSesionCommand,
-            EncodePassword encode) {
+                                   ExisteRevisorEnPHCommand existeRevisorEnPHCommand,
+                                   ExisteSecretaryEnPHCommand existeSecretaryEnPHCommand,
+                                   ObtenerPHCommand obtenerPHCommand,
+                                   PatchPersonalCommand patchPersonalCommand,
+                                   IniciarSesionCommand iniciarSesionCommand,
+                                   EncodePassword encode) {
 
         this.registrarPersonalCommand = registrarPersonalCommand;
         this.existeRevisorEnPHCommand = existeRevisorEnPHCommand;
@@ -55,7 +55,7 @@ public class PersonalApoyoController {
             return ResponseEntity.ok()
                     .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new BusinessException("Ocurrió un error al registrar el revisor");
             //return ResponseEntity.status(500).body("Fallo al registrar Revisor");
         }
@@ -68,7 +68,7 @@ public class PersonalApoyoController {
             return ResponseEntity.ok()
                     .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new BusinessException("Ocurrió un error al registrar el secretario");
         }
     }
@@ -98,11 +98,11 @@ public class PersonalApoyoController {
     @PatchMapping(value = "/patch", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         //Averiguar por qué el update en el repository no está funcionando
-    //    try {
-            System.out.println("EN patchPersonal Controller");
-            System.out.println(personalApoyoDTO);
-            return ResponseEntity.ok()
-                    .body(patchPersonalCommand.ejecutar(personalApoyoDTO));
+        //    try {
+        System.out.println("EN patchPersonal Controller");
+        System.out.println(personalApoyoDTO);
+        return ResponseEntity.ok()
+                .body(patchPersonalCommand.ejecutar(personalApoyoDTO));
 
     /*    } catch (Exception e){
             throw new BusinessException("El usuario no está registrado en el sistema");
@@ -113,11 +113,11 @@ public class PersonalApoyoController {
     public ResponseEntity<Object> iniciarSesion(@RequestBody UserRequestDTO body) {
         //Entra al catch
         try {
-        System.out.println("En body: "+body);
+            System.out.println("En body: " + body);
 
             PersonalApoyoDTO personal = iniciarSesionCommand.ejecutar(body);
 
-            encode.comparePassword(body.getPassword(),personal.getDataPersonal().getPassword());
+            encode.comparePassword(body.getPassword(), personal.getDataPersonal().getPassword());
 
             String idPh = String.valueOf(personal.getIdPropiedadHorizontal());
             PropiedadHorizontalDTO ph = obtenerPHCommand.ejecutar(idPh);
@@ -129,12 +129,12 @@ public class PersonalApoyoController {
             model.put("idPropiedadHorizontal", personal.getIdPropiedadHorizontal());
             model.put("nombrePH", ph.getNombre());
 
-            System.out.println("Despachado: "+model);
+            System.out.println("Despachado: " + model);
 
             return ResponseEntity
                     .ok()
                     .body(model);
-        } catch (Exception e){
+        } catch (Exception e) {
 
             return ResponseEntity
                     .badRequest()

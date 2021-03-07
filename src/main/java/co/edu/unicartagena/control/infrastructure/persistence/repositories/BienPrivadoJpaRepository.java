@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BienPrivadoJpaRepository extends JpaRepository<BienPrivado,Integer>, BienPrivadoRepository {
+public interface BienPrivadoJpaRepository extends JpaRepository<BienPrivado, Integer>, BienPrivadoRepository {
 
     //@Query("select u from BienPrivado u where u.idPropiedad.idPropiedadHorizontal = :idPropiedad")
     @Query(value = "SELECT * FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad", nativeQuery = true)

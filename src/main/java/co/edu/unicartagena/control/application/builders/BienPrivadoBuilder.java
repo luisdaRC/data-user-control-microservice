@@ -6,9 +6,10 @@ import co.edu.unicartagena.control.domain.entities.PropiedadHorizontal;
 
 public class BienPrivadoBuilder {
 
-    public BienPrivadoBuilder(){}
+    public BienPrivadoBuilder() {
+    }
 
-    public static BienPrivado crearBienPrivadoDesdeDTO(BienPrivadoDTO bienPrivadoDTO){
+    public static BienPrivado crearBienPrivadoDesdeDTO(BienPrivadoDTO bienPrivadoDTO) {
         return BienPrivado.builder()
                 .id(bienPrivadoDTO.getId())
                 .idPropiedad(bienPrivadoDTO.getIdPropiedadHorizontal())
@@ -18,7 +19,7 @@ public class BienPrivadoBuilder {
                 .build();
     }
 
-    public static BienPrivadoDTO crearBienPrivadoDTODesdeEntidad(BienPrivado bienPrivado){
+    public static BienPrivadoDTO crearBienPrivadoDTODesdeEntidad(BienPrivado bienPrivado) {
         return BienPrivadoDTO.builder()
                 .id(bienPrivado.getId())
                 .idPropiedadHorizontal(bienPrivado.getId())

@@ -9,7 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class Persona {
 
-    public Persona(){}
+    public Persona() {
+    }
 
     private Integer idPersona;
     //private BienPrivado idBienPrivado;

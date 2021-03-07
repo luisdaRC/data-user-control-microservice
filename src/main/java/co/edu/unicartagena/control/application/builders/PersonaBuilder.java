@@ -6,9 +6,10 @@ import co.edu.unicartagena.control.domain.entities.Persona;
 
 public class PersonaBuilder {
 
-    public PersonaBuilder(){}
+    public PersonaBuilder() {
+    }
 
-    public static Persona crearPersonaDesdePersonaList(PersonaListDTO personaList){
+    public static Persona crearPersonaDesdePersonaList(PersonaListDTO personaList) {
         return Persona.builder().idPersona(personaList.getId())
                 .idBienPrivado(personaList.getBienPrivado().getId())
                 .nombres(personaList.getNombres())
@@ -18,7 +19,7 @@ public class PersonaBuilder {
                 .rol(personaList.getRol()).build();
     }
 
-    public PersonaDTO crearPersonaDTODesdeEntidad(Persona persona){
+    public PersonaDTO crearPersonaDTODesdeEntidad(Persona persona) {
         return PersonaDTO.builder()
                 .nombres(persona.getNombres())
                 .apellidos(persona.getApellido())

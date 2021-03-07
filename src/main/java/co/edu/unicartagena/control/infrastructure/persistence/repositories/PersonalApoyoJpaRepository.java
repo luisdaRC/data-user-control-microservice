@@ -11,35 +11,35 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PersonalApoyoJpaRepository extends JpaRepository<PersonalApoyo,Integer>, PersonalApoyoRepository {
+public interface PersonalApoyoJpaRepository extends JpaRepository<PersonalApoyo, Integer>, PersonalApoyoRepository {
 
 
     @Query(value = "SELECT * FROM personalapoyo WHERE propiedadhorizontal_idph = :idPropiedad and rol = :rol and estado = :estado", nativeQuery = true)
-    Optional<PersonalApoyo> findPersonalApoyoByIdPHAndRol (@Param("idPropiedad") Integer idPropiedad,
-                                                           @Param("rol") String rol,
-                                                           @Param("estado") Boolean estado);
+    Optional<PersonalApoyo> findPersonalApoyoByIdPHAndRol(@Param("idPropiedad") Integer idPropiedad,
+                                                          @Param("rol") String rol,
+                                                          @Param("estado") Boolean estado);
 
 
     @Query(value = "SELECT * FROM personalapoyo WHERE propiedadhorizontal_idph = :idPropiedad and" +
             " rol = :rol and tipodocumento = :tipoDoc and numerodocumento = :numDoc", nativeQuery = true)
-    Optional<PersonalApoyo> findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc (@Param("idPropiedad") Integer idPropiedad,
-                                                                              @Param("rol") String rol,
-                                                                              @Param("tipoDoc") String tipoDoc,
-                                                                              @Param("numDoc") String numDoc);
+    Optional<PersonalApoyo> findPersonalApoyoByIdPHAndRolAndTipoDocAndNumDoc(@Param("idPropiedad") Integer idPropiedad,
+                                                                             @Param("rol") String rol,
+                                                                             @Param("tipoDoc") String tipoDoc,
+                                                                             @Param("numDoc") String numDoc);
 
 
     @Modifying
     @Query(value = "UPDATE personalapoyo SET estado = :estado WHERE idpersonalapoyo = :id", nativeQuery = true)
-    Integer changeEstado (@Param("id") Integer id, @Param("estado") Boolean estado);
+    Integer changeEstado(@Param("id") Integer id, @Param("estado") Boolean estado);
 
 
     @Modifying
     @Query(value = "UPDATE personalapoyo SET email = :email, pass = :pass, estado = :estado " +
             "WHERE tipodocumento = :tipoDoc and numerodocumento = :numDoc", nativeQuery = true)
-    Integer updateEstadoAndEmailAndPassByTipoAndNumDoc (@Param("estado") Boolean estado,
-                                                         @Param("email") String  email,
-                                                         @Param("pass") String pass,
-                                                         @Param("tipoDoc") String tipoDoc,
-                                                         @Param("numDoc") String numDoc);
+    Integer updateEstadoAndEmailAndPassByTipoAndNumDoc(@Param("estado") Boolean estado,
+                                                       @Param("email") String email,
+                                                       @Param("pass") String pass,
+                                                       @Param("tipoDoc") String tipoDoc,
+                                                       @Param("numDoc") String numDoc);
 
 }

@@ -11,7 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PropiedadHorizontal {
 
-    public PropiedadHorizontal(){}
+    public PropiedadHorizontal() {
+    }
 
     private Integer id;
     private String nombre;

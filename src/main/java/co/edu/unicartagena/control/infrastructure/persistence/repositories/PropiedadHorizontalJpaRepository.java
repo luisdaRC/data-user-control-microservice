@@ -11,10 +11,10 @@ import java.util.Optional;
 
 
 @Repository
-public interface PropiedadHorizontalJpaRepository extends JpaRepository<PropiedadHorizontal,Integer>, PropiedadHorizontalRepository {
+public interface PropiedadHorizontalJpaRepository extends JpaRepository<PropiedadHorizontal, Integer>, PropiedadHorizontalRepository {
 
     @Query(value = "SELECT * FROM propiedadhorizontal WHERE idpropiedadhorizontal = :id", nativeQuery = true)
-    Optional<PropiedadHorizontal> findPHById (@Param("id") Integer id);
+    Optional<PropiedadHorizontal> findPHById(@Param("id") Integer id);
 
     PropiedadHorizontal save(PropiedadHorizontal propiedadHorizontal);
 }

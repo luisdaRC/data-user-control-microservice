@@ -26,8 +26,8 @@ public class PropiedadHorizontalController {
 
     @Autowired
     public PropiedadHorizontalController(RegistrarPHCommand registrarPHCommand,
-            ExistePHCommand existePHCommand,
-            UpdatePersonasYBienesCommand updatePersonasYBienesCommand) {
+                                         ExistePHCommand existePHCommand,
+                                         UpdatePersonasYBienesCommand updatePersonasYBienesCommand) {
 
         this.registrarPHCommand = registrarPHCommand;
         this.existePHCommand = existePHCommand;
@@ -36,9 +36,9 @@ public class PropiedadHorizontalController {
 
     /**
      * No es necesario verificar si existe la propiedad dado que la validación está hecho en el front
-     * */
+     */
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody List<PropiedadHorizontalDTO> propiedadHorizontalDTO){
+    public ResponseEntity<Object> registrarPropiedadHorizontal(@RequestBody List<PropiedadHorizontalDTO> propiedadHorizontalDTO) {
         System.out.println("Entra a registrar propiedad");
         return ResponseEntity.ok()
                 .body(registrarPHCommand.ejecutar(propiedadHorizontalDTO.get(0)));
@@ -46,16 +46,16 @@ public class PropiedadHorizontalController {
 
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> existePropiedadHorizontal(
-            @RequestParam(name = "idPropiedadHorizontal") String idPropiedad){
+            @RequestParam(name = "idPropiedadHorizontal") String idPropiedad) {
 
         log.debug("Entra a existePH");
-        System.out.println("Entra a existePH: "+idPropiedad);
+        System.out.println("Entra a existePH: " + idPropiedad);
 
         Boolean exist = existePHCommand.ejecutar(idPropiedad);
 
         log.debug("Asigna boolean");
 
-        Map<Object,Object> model = new HashMap<>();
+        Map<Object, Object> model = new HashMap<>();
         model.put("existePH", exist);
         System.out.println("Asigna y retorna boolean");
         return ResponseEntity.ok().body(model);
@@ -65,10 +65,10 @@ public class PropiedadHorizontalController {
      * Caso 3: Que se tengan registros y hayan menos en la lista del core (eliminados).
      * (In this case, the records in database will be the same because any information
      * about the person deleted would be needed in the future, regarding to votes).
-     * */
+     */
     @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updatePersonasYBienes(@RequestBody List<PersonaListDTO> personaListDTO){
-        System.out.println("Entra a updatePersonas"+personaListDTO.get(0));
+    public ResponseEntity<Object> updatePersonasYBienes(@RequestBody List<PersonaListDTO> personaListDTO) {
+        System.out.println("Entra a updatePersonas" + personaListDTO.get(0));
         return ResponseEntity.ok().body(updatePersonasYBienesCommand.ejecutar(personaListDTO));
     }
 

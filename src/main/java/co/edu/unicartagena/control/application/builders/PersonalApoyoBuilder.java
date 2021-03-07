@@ -6,9 +6,10 @@ import co.edu.unicartagena.control.domain.entities.PersonalApoyo;
 
 public class PersonalApoyoBuilder {
 
-    public PersonalApoyoBuilder(){}
+    public PersonalApoyoBuilder() {
+    }
 
-    public static PersonalApoyo crearPersonalApoyodesdeDTO(PersonalApoyoDTO personalApoyoDTO){
+    public static PersonalApoyo crearPersonalApoyodesdeDTO(PersonalApoyoDTO personalApoyoDTO) {
         return PersonalApoyo.builder()
                 .idPropiedad(personalApoyoDTO.getIdPropiedadHorizontal())
                 .estado(personalApoyoDTO.getEstado())
@@ -21,7 +22,7 @@ public class PersonalApoyoBuilder {
                 .build();
     }
 
-    public static PersonalApoyoDTO crearPersonalApoyoDTODesdeEntidad(PersonalApoyo personalApoyo){
+    public static PersonalApoyoDTO crearPersonalApoyoDTODesdeEntidad(PersonalApoyo personalApoyo) {
         DataPersonalDTO dataPersonalDTO =
                 new DataPersonalDTO(personalApoyo.getEmail(),
                         personalApoyo.getPass(),

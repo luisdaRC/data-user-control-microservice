@@ -22,15 +22,15 @@ public class PHService {
     private final PersonaRepository personaRepository;
     private final BienPrivadoRepository bienPrivadoRepository;
 
-    public  PHService(PropiedadHorizontalRepository propiedadHorizontalRepository,
-                      PersonaRepository personaRepository,
-                      BienPrivadoRepository bienPrivadoRepository){
+    public PHService(PropiedadHorizontalRepository propiedadHorizontalRepository,
+                     PersonaRepository personaRepository,
+                     BienPrivadoRepository bienPrivadoRepository) {
         this.propiedadHorizontalRepository = propiedadHorizontalRepository;
         this.personaRepository = personaRepository;
         this.bienPrivadoRepository = bienPrivadoRepository;
     }
 
-    public PropiedadHorizontal registrarPropiedad(PropiedadHorizontal propiedadHorizontal){
+    public PropiedadHorizontal registrarPropiedad(PropiedadHorizontal propiedadHorizontal) {
         log.debug("Se procede a registrar Propiedad Horizontal {} en el sistema.",
                 propiedadHorizontal.getNombre());
         System.out.println("Estoy en PHService, dominio");
@@ -38,15 +38,15 @@ public class PHService {
         return propiedadHorizontalRepository.save(propiedadHorizontal);
     }
 
-    public Boolean existePropiedad(String idPropiedad){
-        log.debug("Verificando existencia de Propiedad con id {} en PHService",idPropiedad);
-        System.out.println("Verificando existencia de Propiedad con id en PHService: "+idPropiedad);
+    public Boolean existePropiedad(String idPropiedad) {
+        log.debug("Verificando existencia de Propiedad con id {} en PHService", idPropiedad);
+        System.out.println("Verificando existencia de Propiedad con id en PHService: " + idPropiedad);
         return propiedadHorizontalRepository.findPHById(Integer.parseInt(idPropiedad)).isPresent();
     }
 
-    public PropiedadHorizontal obtenerPropiedad(String id){
-        if(!existePropiedad(id)) {
-            log.debug("La propiedad con id {} no existe",id);
+    public PropiedadHorizontal obtenerPropiedad(String id) {
+        if (!existePropiedad(id)) {
+            log.debug("La propiedad con id {} no existe", id);
             throw new BusinessException("La propiedad indicada no existe");
         }
 
@@ -56,27 +56,27 @@ public class PHService {
 
     @Transactional
     public List<Persona> updateData(List<Persona> personas, List<BienPrivado> bienPrivados) {
-        System.out.println("Actualizando datos de la propiedad: "+bienPrivados.get(0).getIdPropiedad());
+        System.out.println("Actualizando datos de la propiedad: " + bienPrivados.get(0).getIdPropiedad());
 
         //In next occasions if retrieve data with select * make a for and query line by line in a for loop
         Optional<List<BienPrivado>> existenBienes = bienPrivadoRepository.findByIdPropiedad(bienPrivados.get(0).getId());
 
-        System.out.println("Vamo a ver si esto existen bienes en update: "+existenBienes.isPresent());
+        System.out.println("Vamo a ver si esto existen bienes en update: " + existenBienes.isPresent());
 
-        System.out.println("Contenido de lista personas que ingresa a PHservice: "+personas.toString());
+        System.out.println("Contenido de lista personas que ingresa a PHservice: " + personas.toString());
 
-        System.out.println("Vamo a ver qué hay en existenBienes: "+existenBienes.get().toString());
+        System.out.println("Vamo a ver qué hay en existenBienes: " + existenBienes.get().toString());
 
         // If there are no "bienes" in that property, then they all are stored in database
-        if (existenBienes.toString().equals("Optional[[]]")){
+        if (existenBienes.toString().equals("Optional[[]]")) {
             log.debug("Propiedad #: {} con datos de personas vacios, insertándolos.", bienPrivados.get(0).getIdPropiedad());
             List<Persona> listP = new ArrayList<Persona>();
             List<BienPrivado> listB = new ArrayList<BienPrivado>();
 
-            for(BienPrivado b:bienPrivados)
+            for (BienPrivado b : bienPrivados)
                 listB.add(bienPrivadoRepository.save(b));
 
-            for(Persona p:personas)
+            for (Persona p : personas)
                 listP.add(personaRepository.save(p));
 
             return listP;
@@ -88,7 +88,7 @@ public class PHService {
         // from the core and insert the missing ones
         List<Persona> existenPersonas = personaRepository.findByIdPropiedad(bienPrivados.get(0).getId());
 
-        System.out.println("Vamo a ver si esto existe en personas en update: "+existenPersonas);
+        System.out.println("Vamo a ver si esto existe en personas en update: " + existenPersonas);
 
         log.debug("Actualizando datos faltantes de personas en la propiedad #: {}", bienPrivados.get(0).getIdPropiedad());
         List<Persona> listP = new ArrayList<Persona>();
@@ -97,17 +97,17 @@ public class PHService {
         listB.addAll(deleteBienesDuplicados(existenBienes.get(), bienPrivados));
         listP.addAll(deletePersonasDuplicadas(existenPersonas, personas));
 
-        for(BienPrivado b:listB)
+        for (BienPrivado b : listB)
             bienPrivadoRepository.save(b);
 
-        for(Persona p:listP)
+        for (Persona p : listP)
             personaRepository.save(p);
 
         return listP;
 
     }
 
-    public List<Persona> deletePersonasDuplicadas(List<Persona> personasEnDB, List<Persona> personasDeCore){
+    public List<Persona> deletePersonasDuplicadas(List<Persona> personasEnDB, List<Persona> personasDeCore) {
         Set<Persona> setPersonasEnDB = new HashSet<>();
         Set<Persona> setPersonasDeCore = new HashSet<>();
 
@@ -117,7 +117,7 @@ public class PHService {
 
         //Asymmetric difference to get the non present in DB
         setPersonasDeCore.removeAll(setPersonasEnDB);
-        
+
         List<Persona> difference = new ArrayList<>();
 
         //Set to List
@@ -126,7 +126,7 @@ public class PHService {
         return difference;
     }
 
-    public List<BienPrivado> deleteBienesDuplicados(List<BienPrivado> bienesEnDB, List<BienPrivado> bienesDeCore){
+    public List<BienPrivado> deleteBienesDuplicados(List<BienPrivado> bienesEnDB, List<BienPrivado> bienesDeCore) {
         Set<BienPrivado> setBienesEnDB = new HashSet<>();
         Set<BienPrivado> setBienesDeCore = new HashSet<>();
 

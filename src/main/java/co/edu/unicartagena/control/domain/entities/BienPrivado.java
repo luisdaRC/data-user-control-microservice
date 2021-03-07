@@ -9,7 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class BienPrivado {
 
-    public BienPrivado(){}
+    public BienPrivado() {
+    }
 
     private Integer id;
     private Integer idPropiedad;
