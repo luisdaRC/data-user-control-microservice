@@ -2,7 +2,9 @@ package co.edu.unicartagena.control.infrastructure.controllers;
 
 import co.edu.unicartagena.control.application.commands.propiedad.ExistePHCommand;
 import co.edu.unicartagena.control.application.commands.propiedad.RegistrarPHCommand;
+import co.edu.unicartagena.control.application.commands.propiedad.UpdateCoeficienteCommand;
 import co.edu.unicartagena.control.application.commands.propiedad.UpdatePersonasYBienesCommand;
+import co.edu.unicartagena.control.application.dtos.CoeficienteDTO;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.application.dtos.PropiedadHorizontalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,18 @@ public class PropiedadHorizontalController {
     RegistrarPHCommand registrarPHCommand;
     ExistePHCommand existePHCommand;
     UpdatePersonasYBienesCommand updatePersonasYBienesCommand;
+    UpdateCoeficienteCommand updateCoeficienteCommand;
 
     @Autowired
     public PropiedadHorizontalController(RegistrarPHCommand registrarPHCommand,
                                          ExistePHCommand existePHCommand,
-                                         UpdatePersonasYBienesCommand updatePersonasYBienesCommand) {
+                                         UpdatePersonasYBienesCommand updatePersonasYBienesCommand,
+                                         UpdateCoeficienteCommand updateCoeficienteCommand) {
 
         this.registrarPHCommand = registrarPHCommand;
         this.existePHCommand = existePHCommand;
         this.updatePersonasYBienesCommand = updatePersonasYBienesCommand;
+        this.updateCoeficienteCommand = updateCoeficienteCommand;
     }
 
     /**
@@ -59,6 +64,18 @@ public class PropiedadHorizontalController {
         model.put("existePH", exist);
         System.out.println("Asigna y retorna boolean");
         return ResponseEntity.ok().body(model);
+    }
+
+    @PostMapping(value = "/updateCoeficiente", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> updateCoeficiente(@RequestBody CoeficienteDTO coeficienteDTO) {
+        System.out.println("Entra a updateCoeficiente" + coeficienteDTO);
+
+        try{
+            return ResponseEntity.ok().body(updateCoeficienteCommand.ejecutar(coeficienteDTO));
+        }catch(Exception e){
+            return ResponseEntity.ok().body("Error: "+e.getMessage());
+        }
+
     }
 
     /**

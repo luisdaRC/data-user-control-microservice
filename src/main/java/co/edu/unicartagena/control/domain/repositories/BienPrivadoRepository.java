@@ -10,4 +10,6 @@ public interface BienPrivadoRepository {
 
     Optional<List<BienPrivado>> findByIdPropiedad(Integer idPropiedad);
 
+    Optional<Integer> updateCoeficiente(Integer idBienPrivado, Float coeficiente);
+
 }

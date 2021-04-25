@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonaJpaRepository extends JpaRepository<Persona, Integer>, PersonaRepository {
@@ -17,5 +18,10 @@ public interface PersonaJpaRepository extends JpaRepository<Persona, Integer>, P
             "JOIN propiedadhorizontal ON bienprivado.propiedadhorizontal_idph = :idPropiedad " +
             "GROUP BY persona.idpersona", nativeQuery = true)
     List<Persona> findByIdPropiedad(@Param("idPropiedad") Integer idPropiedad);
+
+    @Query(value = "SELECT bienprivado_idbienprivado FROM persona WHERE tipodocumento = :tipoDoc " +
+            "AND numerodocumento = :numDoc", nativeQuery = true)
+    Optional<Integer> findBienPersonaByTipoAndNumDoc(@Param("tipoDoc") String tipoDoc,
+                                                     @Param("numDoc") String numDoc);
 
 }

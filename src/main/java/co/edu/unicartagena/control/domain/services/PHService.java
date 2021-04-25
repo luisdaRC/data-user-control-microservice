@@ -54,6 +54,15 @@ public class PHService {
         return ph.get();
     }
 
+    public Integer updateCoeficiente(Float coeficiente, String tipoDoc, String numDoc){
+
+            Optional<Integer> idBienPrivado = personaRepository.findBienPersonaByTipoAndNumDoc(tipoDoc, numDoc);
+
+            Optional<Integer> updated = bienPrivadoRepository.updateCoeficiente(idBienPrivado.get(), coeficiente);
+
+        return updated.get();
+    }
+
     @Transactional
     public List<Persona> updateData(List<Persona> personas, List<BienPrivado> bienPrivados) {
         System.out.println("Actualizando datos de la propiedad: " + bienPrivados.get(0).getIdPropiedad());
