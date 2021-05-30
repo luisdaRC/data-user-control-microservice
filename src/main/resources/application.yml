@@ -17,5 +17,6 @@ spring:
       - db/mappings/bienprivado.xml
       - db/mappings/personalapoyo.xml
       - db/mappings/propiedadhorizontal.xml
+      - db/mappings/restriccion.xml
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml

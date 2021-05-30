@@ -55,12 +55,34 @@ public class PHService {
     }
 
     public Integer updateCoeficiente(Float coeficiente, String tipoDoc, String numDoc){
-
             Optional<Integer> idBienPrivado = personaRepository.findBienPersonaByTipoAndNumDoc(tipoDoc, numDoc);
-
             Optional<Integer> updated = bienPrivadoRepository.updateCoeficiente(idBienPrivado.get(), coeficiente);
-
         return updated.get();
+    }
+
+    public Integer registrarRestriccion(String idPropiedad, Boolean admin, Boolean consejo, Boolean presupuesto, Boolean proposicionGeneral){
+        String restricciones = "";
+        try {
+            if (admin && consejo && presupuesto && proposicionGeneral) {
+                restricciones = "TODAS";
+                propiedadHorizontalRepository.saveRestrictions(Integer.parseInt(idPropiedad), restricciones);
+                return 0; //Todas las restricciones
+            }
+
+            if (admin)
+                restricciones += "ADMINISTRADOR,";
+            if (consejo)
+                restricciones += "CONSEJO_ADMIN,";
+            if (presupuesto)
+                restricciones += "PRESUPUESTO,";
+            if (proposicionGeneral)
+                restricciones += "PROPOSICIONES";
+
+            propiedadHorizontalRepository.saveRestrictions(Integer.parseInt(idPropiedad), restricciones);
+            return 1; //Las restricciones seleccionadas
+        }catch (Exception e) {
+            return 2; //Error al registrar restricciones. Inténtelo más tarde
+        }
     }
 
     @Transactional

@@ -4,20 +4,20 @@ import co.edu.unicartagena.control.application.commands.propiedad.ExistePHComman
 import co.edu.unicartagena.control.application.commands.propiedad.RegistrarPHCommand;
 import co.edu.unicartagena.control.application.commands.propiedad.UpdateCoeficienteCommand;
 import co.edu.unicartagena.control.application.commands.propiedad.UpdatePersonasYBienesCommand;
+import co.edu.unicartagena.control.application.commands.propiedad.RegistrarRestriccionCommand;
 import co.edu.unicartagena.control.application.dtos.CoeficienteDTO;
 import co.edu.unicartagena.control.application.dtos.PersonaListDTO;
 import co.edu.unicartagena.control.application.dtos.PropiedadHorizontalDTO;
+import co.edu.unicartagena.control.application.dtos.RestriccionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import lombok.extern.log4j.Log4j2;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Log4j2
 @RestController
 @RequestMapping("/propiedad-horizontal")
 public class PropiedadHorizontalController {
@@ -26,17 +26,20 @@ public class PropiedadHorizontalController {
     ExistePHCommand existePHCommand;
     UpdatePersonasYBienesCommand updatePersonasYBienesCommand;
     UpdateCoeficienteCommand updateCoeficienteCommand;
+    RegistrarRestriccionCommand registrarRestriccionCommand;
 
     @Autowired
     public PropiedadHorizontalController(RegistrarPHCommand registrarPHCommand,
                                          ExistePHCommand existePHCommand,
                                          UpdatePersonasYBienesCommand updatePersonasYBienesCommand,
-                                         UpdateCoeficienteCommand updateCoeficienteCommand) {
+                                         UpdateCoeficienteCommand updateCoeficienteCommand,
+                                         RegistrarRestriccionCommand registrarRestriccionCommand) {
 
         this.registrarPHCommand = registrarPHCommand;
         this.existePHCommand = existePHCommand;
         this.updatePersonasYBienesCommand = updatePersonasYBienesCommand;
         this.updateCoeficienteCommand = updateCoeficienteCommand;
+        this.registrarRestriccionCommand = registrarRestriccionCommand;
     }
 
     /**
@@ -53,12 +56,10 @@ public class PropiedadHorizontalController {
     public ResponseEntity<Object> existePropiedadHorizontal(
             @RequestParam(name = "idPropiedadHorizontal") String idPropiedad) {
 
-        log.debug("Entra a existePH");
         System.out.println("Entra a existePH: " + idPropiedad);
 
         Boolean exist = existePHCommand.ejecutar(idPropiedad);
 
-        log.debug("Asigna boolean");
 
         Map<Object, Object> model = new HashMap<>();
         model.put("existePH", exist);
@@ -68,14 +69,22 @@ public class PropiedadHorizontalController {
 
     @PostMapping(value = "/updateCoeficiente", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateCoeficiente(@RequestBody CoeficienteDTO coeficienteDTO) {
-        System.out.println("Entra a updateCoeficiente" + coeficienteDTO);
 
         try{
             return ResponseEntity.ok().body(updateCoeficienteCommand.ejecutar(coeficienteDTO));
         }catch(Exception e){
             return ResponseEntity.ok().body("Error: "+e.getMessage());
         }
+    }
 
+    @PostMapping(value = "/restriccion", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> registrarRestriccion(@RequestBody RestriccionDTO restriccionDTO) {
+
+        try{
+            return ResponseEntity.ok().body(registrarRestriccionCommand.ejecutar(restriccionDTO));
+        }catch(Exception e){
+            return ResponseEntity.ok().body("Error: "+e.getMessage());
+        }
     }
 
     /**
