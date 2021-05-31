@@ -60,10 +60,10 @@ public class PHService {
         return updated.get();
     }
 
-    public Integer registrarRestriccion(String idPropiedad, Boolean admin, Boolean consejo, Boolean presupuesto, Boolean proposicionGeneral){
+    public Integer registrarRestriccion(String idPropiedad, Boolean admin, Boolean consejo, Boolean presupuesto, Boolean proposicionGeneral, Boolean comiteConvivencia, Boolean revisor){
         String restricciones = "";
         try {
-            if (admin && consejo && presupuesto && proposicionGeneral) {
+            if (admin && consejo && presupuesto && proposicionGeneral && comiteConvivencia && revisor) {
                 restricciones = "TODAS";
                 propiedadHorizontalRepository.saveRestrictions(Integer.parseInt(idPropiedad), restricciones);
                 return 0; //Todas las restricciones
@@ -73,6 +73,10 @@ public class PHService {
                 restricciones += "ADMINISTRADOR,";
             if (consejo)
                 restricciones += "CONSEJO_ADMIN,";
+            if (comiteConvivencia)
+                restricciones += "COMITE_CONVIVENCIA,";
+            if (revisor)
+                restricciones += "REVISOR,";
             if (presupuesto)
                 restricciones += "PRESUPUESTO,";
             if (proposicionGeneral)

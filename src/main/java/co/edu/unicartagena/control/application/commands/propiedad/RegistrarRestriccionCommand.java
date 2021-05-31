@@ -22,6 +22,7 @@ public class RegistrarRestriccionCommand implements Command<Integer, Restriccion
         System.out.println("Ejecutando el comando: RegistrarRestriccion con los datos: "+ restriccionDTO);
         return phService.registrarRestriccion(restriccionDTO.getIdPropiedadHorizontal(),
                 restriccionDTO.getAdmin(), restriccionDTO.getConsejo(),
-                restriccionDTO.getPresupuesto(), restriccionDTO.getProposicionGeneral());
+                restriccionDTO.getPresupuesto(), restriccionDTO.getProposicionGeneral(),
+                restriccionDTO.getComiteConvivencia(), restriccionDTO.getRevisor());
     }
 }

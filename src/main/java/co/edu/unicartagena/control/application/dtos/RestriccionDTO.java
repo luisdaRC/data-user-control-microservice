@@ -16,5 +16,7 @@ public class RestriccionDTO {
     private final Boolean admin;
     private final Boolean presupuesto;
     private final Boolean proposicionGeneral;
+    private final Boolean comiteConvivencia;
+    private final Boolean revisor;
 
 }
