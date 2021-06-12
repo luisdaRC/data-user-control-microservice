@@ -23,6 +23,6 @@ public class RegistrarRestriccionCommand implements Command<Integer, Restriccion
         return phService.registrarRestriccion(restriccionDTO.getIdPropiedadHorizontal(),
                 restriccionDTO.getAdmin(), restriccionDTO.getConsejo(),
                 restriccionDTO.getPresupuesto(), restriccionDTO.getProposicionGeneral(),
-                restriccionDTO.getComiteConvivencia(), restriccionDTO.getRevisor());
+                restriccionDTO.getComiteConvivencia(), restriccionDTO.getRevisor(), restriccionDTO.getEstados());
     }
 }
