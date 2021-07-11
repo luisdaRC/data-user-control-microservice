@@ -8,9 +8,9 @@ import lombok.*;
 @Builder
 public class BienPrivadoDTO {
 
-    private final int id;
-    private final int idPropiedad;
-    private final int idNomenclatura;
+    private final Integer id;
+    private final Integer idPropiedadHorizontal;
+    private final Integer idNomeclatura;
     private final String matriculaInmobiliaria;
     private final String referenciaCatastral;
 }

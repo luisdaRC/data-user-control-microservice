@@ -8,21 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistrarPHCommand implements Command<PropiedadHorizontalDTO, PropiedadHorizontalDTO> {
+public class ObtenerPHCommand implements Command<PropiedadHorizontalDTO, String> {
 
     private final PHService phService;
 
     @Autowired
-    public RegistrarPHCommand(PHService phService) {
+    public ObtenerPHCommand(PHService phService) {
         this.phService = phService;
     }
 
-    public PropiedadHorizontalDTO ejecutar(PropiedadHorizontalDTO phDTO) {
-        System.out.println("Ejecutando el comando: RegistrarPH con los datos: "+ phDTO);
+    public PropiedadHorizontalDTO ejecutar(String idPropiedad) {
+        System.out.println("Ejecutando el comando: ObtenerPH con id de PH: "+idPropiedad);
         return PropiedadHorizontalBuilder.crearPHDTODesdeEntidad(
-                phService.registrarPropiedad(PropiedadHorizontalBuilder
-                        .crearPHDesdeDTO(phDTO)));
+                phService.obtenerPropiedad(idPropiedad));
     }
-
 
 }

@@ -1,6 +1,6 @@
 package co.edu.unicartagena.control.domain.exceptions;
 
-public class BusinessException extends RuntimeException{
+public class BusinessException extends RuntimeException {
 
     private final Integer code;
     private final String message;
@@ -10,12 +10,12 @@ public class BusinessException extends RuntimeException{
         this.code = 404;
     }
 
-    public BusinessException(String message, Integer code){
+    public BusinessException(String message, Integer code) {
         this.message = message;
         this.code = code;
     }
 
-    public Integer getCode(){
+    public Integer getCode() {
         return this.code;
     }
 }

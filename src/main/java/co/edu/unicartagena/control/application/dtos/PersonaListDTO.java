@@ -11,11 +11,11 @@ import lombok.ToString;
 @Builder
 public class PersonaListDTO {
 
-    private final int idPersona;
+    private final Integer id;
     private final String nombres;
-    private final String apellidos;
+    private final String apellido;
     private final String numeroDocumento;
     private final String tipoDocumento;
     private final String rol;
-    private final BienPrivadoDTO bienPrivadoDTO;
+    private final BienPrivadoDTO bienPrivado;
 }

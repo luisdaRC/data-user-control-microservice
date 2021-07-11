@@ -1,19 +1,24 @@
 package co.edu.unicartagena.control.domain.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PropiedadHorizontal {
 
-    private final int id;
-    private final String nombre;
-    private final String tipo;
-    private final String direccion;
+    public PropiedadHorizontal() {
+    }
+
+    private Integer id;
+    private String nombre;
+    private String tipo;
+    private String direccion;/*
+    private List<PersonalApoyo> personalApoyoList;
+    private List<BienPrivado> bienPrivadoList;*/
 
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 @Builder
 public class PropiedadHorizontalDTO {
 
-    private final int id;
+    private final int idPh;
     private final String nombre;
     private final String tipo;
     private final String direccion;

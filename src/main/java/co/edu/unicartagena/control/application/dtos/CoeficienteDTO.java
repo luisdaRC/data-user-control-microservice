@@ -9,14 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class PersonaDTO {
+public class CoeficienteDTO {
 
-    private final Integer idPersona;
-    private final String nombres;
-    private final String apellidos;
-    private final String numeroDocumento;
     private final String tipoDocumento;
-    private final String rol;
-
-
+    private final String numeroDocumento;
+    private final Float coeficiente;
 }
