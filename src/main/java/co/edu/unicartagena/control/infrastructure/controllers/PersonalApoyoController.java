@@ -48,8 +48,6 @@ public class PersonalApoyoController {
     @PostMapping(value = "/revisor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registrarRevisor(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         try {
-            System.out.println("Primero");
-            System.out.println(personalApoyoDTO);
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
             System.out.println("Pasa encode");
             return ResponseEntity.ok()
@@ -57,7 +55,6 @@ public class PersonalApoyoController {
 
         } catch (Exception e) {
             throw new BusinessException("Ocurrió un error al registrar el revisor");
-            //return ResponseEntity.status(500).body("Fallo al registrar Revisor");
         }
     }
 
@@ -67,7 +64,6 @@ public class PersonalApoyoController {
             PersonalApoyoDTO personalApoyoDTO1 = encode.encodePassword(personalApoyoDTO);
             return ResponseEntity.ok()
                     .body(registrarPersonalCommand.ejecutar(personalApoyoDTO1));
-
         } catch (Exception e) {
             throw new BusinessException("Ocurrió un error al registrar el secretario");
         }
@@ -99,7 +95,7 @@ public class PersonalApoyoController {
     public ResponseEntity<Object> patchPersonal(@RequestBody PersonalApoyoDTO personalApoyoDTO) {
         //Averiguar por qué el update en el repository no está funcionando
         //    try {
-        System.out.println("EN patchPersonal Controller");
+        System.out.println("En patchPersonal Controller");
         System.out.println(personalApoyoDTO);
         return ResponseEntity.ok()
                 .body(patchPersonalCommand.ejecutar(personalApoyoDTO));

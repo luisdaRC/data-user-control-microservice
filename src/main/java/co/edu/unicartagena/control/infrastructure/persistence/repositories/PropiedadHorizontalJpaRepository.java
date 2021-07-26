@@ -24,4 +24,10 @@ public interface PropiedadHorizontalJpaRepository extends JpaRepository<Propieda
     @Query(value = "INSERT INTO restriccion VALUES (DEFAULT, :idPropiedad, :restricciones)", nativeQuery = true)
     @Transactional
     Integer saveRestrictions(@Param("idPropiedad") Integer idPropiedad, @Param("restricciones") String restricciones);
+
+    @Query(value = "SELECT sum(coeficientecopropiedad) FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad", nativeQuery = true)
+    Float findTotalCoeficiente(@Param("idPropiedad") Integer idPropiedad);
+
+    @Query(value = "SELECT count(*) FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad", nativeQuery = true)
+    Integer findTotalPropietarios(@Param("idPropiedad") Integer idPropiedad);
 }

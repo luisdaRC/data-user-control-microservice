@@ -40,9 +40,9 @@
                 <column name="rol"/>
             </basic>
 
-            <!--many-to-one name="idBienPrivado" target-entity="co.edu.unicartagena.control.domain.entities.BienPrivado">
-                <join-column name="bienprivado_idbienprivado" referenced-column-name="idbienprivado"/>
-            </many-to-one-->
+            <basic name="moroso">
+                <column name="moroso"/>
+            </basic>
 
         </attributes>
     </entity>
