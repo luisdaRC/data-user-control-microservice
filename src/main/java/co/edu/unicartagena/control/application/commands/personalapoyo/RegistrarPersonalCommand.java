@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistrarPersonalCommand implements Command<PersonalApoyoDTO, PersonalApoyoDTO> {
+public class RegistrarPersonalCommand implements Command<Integer, PersonalApoyoDTO> {
 
     private final PersonalApoyoService personalApoyoService;
 
@@ -17,10 +17,9 @@ public class RegistrarPersonalCommand implements Command<PersonalApoyoDTO, Perso
         this.personalApoyoService = personalApoyoService;
     }
 
-    public PersonalApoyoDTO ejecutar(PersonalApoyoDTO personalApoyoDTO) {
+    public Integer ejecutar(PersonalApoyoDTO personalApoyoDTO) {
         System.out.println("Ejecutando el comando: RegistrarPersonal con los datos: "+ personalApoyoDTO);
-        return PersonalApoyoBuilder.crearPersonalApoyoDTODesdeEntidad(
-                personalApoyoService.registrarPersonal(PersonalApoyoBuilder
-                        .crearPersonalApoyodesdeDTO(personalApoyoDTO)));
+        return personalApoyoService.registrarPersonal(PersonalApoyoBuilder
+                        .crearPersonalApoyodesdeDTO(personalApoyoDTO));
     }
 }
