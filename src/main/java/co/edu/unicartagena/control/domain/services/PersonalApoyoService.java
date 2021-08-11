@@ -39,7 +39,7 @@ public class PersonalApoyoService {
         Float totalCoeficientes = propiedadHorizontalRepository.findTotalCoeficiente(personalApoyo.getIdPropiedad());
         Integer totalPropietarios = propiedadHorizontalRepository.findTotalPropietarios(personalApoyo.getIdPropiedad());
 
-        if(totalCoeficientes.intValue() != totalPropietarios || totalCoeficientes.intValue() != 100){
+        if(totalCoeficientes.intValue() != totalPropietarios && totalCoeficientes.intValue() != 100){
             return 5;//Los coeficientes de copropiedad no están debidamente registrados
         }
 
