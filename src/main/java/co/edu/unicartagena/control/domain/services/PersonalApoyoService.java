@@ -110,6 +110,11 @@ public class PersonalApoyoService {
             System.out.println("Correo inexistente");
             throw new BusinessException("Correo inexistente");
         }
+
+        if(!personal.get().getEstado()){
+            System.out.println("Personal no habilitado");
+            throw new BusinessException("Personal no habilitado. Comuníquese con su administrador");
+        }
 /*
         if(!personal.get().getPass().equals(encodedPass)){
             log.debug("Password incorrecto");
