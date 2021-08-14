@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import javax.transaction.Transactional;
 
@@ -30,4 +31,9 @@ public interface PropiedadHorizontalJpaRepository extends JpaRepository<Propieda
 
     @Query(value = "SELECT count(*) FROM bienprivado WHERE propiedadhorizontal_idph = :idPropiedad", nativeQuery = true)
     Integer findTotalPropietarios(@Param("idPropiedad") Integer idPropiedad);
+
+    @Modifying
+    @Query(value = "INSERT INTO asamblea VALUES (DEFAULT, :idSecretario, :fechaInicio, :fechaFin)", nativeQuery = true)
+    @Transactional
+    Integer insertAsamblea(@Param("idSecretario") Integer idSecretario, @Param("fechaInicio") LocalDateTime fechaInicio, @Param("fechaFin") LocalDateTime fechaFin);
 }

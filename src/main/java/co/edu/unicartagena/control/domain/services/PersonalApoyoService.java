@@ -8,6 +8,7 @@ import co.edu.unicartagena.control.domain.repositories.PropiedadHorizontalReposi
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -69,13 +70,19 @@ public class PersonalApoyoService {
         System.out.println("Qué tiene existePersonalActivo?: " + actualizarPersonal.toString());
         System.out.println("Qué tiene existePersonalActivo en bool?: " + actualizarPersonal.isPresent());
 
+        LocalDateTime fechaInicio = LocalDateTime.now();
         if (actualizarPersonal.isPresent()) {
             System.out.println("Actualizando datos de " + personalApoyo.getRol() + " en el sistema.");
             personalApoyoRepository.updateEstadoAndEmailAndPassByTipoAndNumDoc(personalApoyo.getEstado(),
                     personalApoyo.getEmail(), personalApoyo.getPass(), personalApoyo.getTipoDocumento(), personalApoyo.getNumeroDocumento());
+
+            propiedadHorizontalRepository.insertAsamblea(actualizarPersonal.get().getId(), fechaInicio, fechaInicio);
             return 4; //Guardado
         }
         personalApoyoRepository.save(personalApoyo);
+        Optional<PersonalApoyo> personalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
+                personalApoyo.getRol(), personalApoyo.getEstado());
+        propiedadHorizontalRepository.insertAsamblea(personalActivo.get().getId(), fechaInicio, fechaInicio);
         return 4;
     }
 
