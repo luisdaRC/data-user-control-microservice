@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -102,12 +103,25 @@ public class PersonalApoyoService {
 
         if (existePersonal.isPresent()) {
             System.out.println("Se procede a actualizar el " + personalApoyo.getRol() + " en el sistema.");
+            if (existePersonal.get().getRol().equals("SECRETARIO")) {
+                Integer idAsamblea = propiedadHorizontalRepository.findIdAsamblea(existePersonal.get().getId()).get();
+                Optional<List<Integer>> idsAsistentes = propiedadHorizontalRepository.findAllAsistentesByIdAsamblea(idAsamblea);
+
+                if (idsAsistentes.isPresent()){
+                    for (Integer idPersona : idsAsistentes.get()) {
+                        LocalDateTime horaSalida = LocalDateTime.now();
+                        propiedadHorizontalRepository.registrarAbandono(idPersona, idAsamblea, horaSalida);
+                    }
+                }
+                LocalDateTime fechaFin = LocalDateTime.now();
+                propiedadHorizontalRepository.finalizarAsamblea(idAsamblea, fechaFin);
+            }
+
             Integer response = personalApoyoRepository.changeEstado(existePersonal.get().getId(), personalApoyo.getEstado());
             return existePersonal.get();
         }
 
         throw new BusinessException("El usuario no está registrado en el sistema");
-
     }
 
     public PersonalApoyo findPersonalByEmail(String email) {
