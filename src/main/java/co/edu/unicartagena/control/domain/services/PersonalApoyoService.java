@@ -76,14 +76,17 @@ public class PersonalApoyoService {
             System.out.println("Actualizando datos de " + personalApoyo.getRol() + " en el sistema.");
             personalApoyoRepository.updateEstadoAndEmailAndPassByTipoAndNumDoc(personalApoyo.getEstado(),
                     personalApoyo.getEmail(), personalApoyo.getPass(), personalApoyo.getTipoDocumento(), personalApoyo.getNumeroDocumento());
-
-            propiedadHorizontalRepository.insertAsamblea(actualizarPersonal.get().getId(), fechaInicio, fechaInicio);
+            if(personalApoyo.getRol().equals("SECRETARIO")){
+                propiedadHorizontalRepository.insertAsamblea(actualizarPersonal.get().getId(), fechaInicio, fechaInicio);
+            }
             return 4; //Guardado
         }
         personalApoyoRepository.save(personalApoyo);
-        Optional<PersonalApoyo> personalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
-                personalApoyo.getRol(), personalApoyo.getEstado());
-        propiedadHorizontalRepository.insertAsamblea(personalActivo.get().getId(), fechaInicio, fechaInicio);
+        if(personalApoyo.getRol().equals("SECRETARIO")){
+            Optional<PersonalApoyo> personalActivo = personalApoyoRepository.findPersonalApoyoByIdPHAndRol(personalApoyo.getIdPropiedad(),
+                    personalApoyo.getRol(), personalApoyo.getEstado());
+            propiedadHorizontalRepository.insertAsamblea(personalActivo.get().getId(), fechaInicio, fechaInicio);
+        }
         return 4;
     }
 
